@@ -1,20 +1,17 @@
 package it.uniroma3.siw.model;
 
 import java.time.LocalDate;
-import jakarta.persistence.CascadeType;
+import java.util.List;
+
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-
+import jakarta.persistence.OneToMany;
 
 @Entity
-@Table(name="users")
-public class User {
-	
+public class Supplier{
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -25,27 +22,22 @@ public class User {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	@OneToOne(fetch=FetchType.EAGER, cascade= {CascadeType.ALL})
-	private Credentials credentials;
 	
-	@OneToOne
-	private Supplier supplier;
-	
-	public Supplier getSupplier() {
-		return this.supplier;
+	@OneToMany
+	List<Car> cars;
+
+	public List<Car> getRecipes() {
+		return cars;
+	}
+
+	public void setRecipes(List<Car> recipes) {
+		this.cars = recipes;
 	}
 	
-	public void setCook(Supplier s) {
-		this.supplier=s;
-	}
-	
+
 	private String name;
 	private String surname;
-	
-	
 	private LocalDate birth;
-	
-	
 	private String urlImage;
 	
 	
@@ -62,7 +54,6 @@ public class User {
 		this.surname = surname;
 	}
 	
-	
 	public LocalDate getBirth() {
 		return birth;
 	}
@@ -76,6 +67,10 @@ public class User {
 		this.urlImage = urlImage;
 	}
 	
-	
-	
+		
+		
+		
 }
+
+	
+
