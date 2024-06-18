@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Aggiorna Auto</title>
+		<link rel="stylesheet" href="/stile.css?version=2" />
+	</head>
+	
+	<body>
+		<div><a href="/"><img src="/images/logo-siw.png" width="50%" /></a></div>
+		<h1>Aggiorna Auto</h1>
+			<a th:text="${car.marca} + ' ' +${car.modello}">up!(2000)</a>	
+			<p>
+				<h3>Modifiche:</h3>
+				<a th:href="@{'/admin/removeCar/' + ${car.id} }">Rimuovi Auto dal Catalogo</a>
+			</p>
+	</body>
+	
+	
+	
+</html>

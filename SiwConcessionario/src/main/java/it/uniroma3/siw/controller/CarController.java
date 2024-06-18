@@ -19,6 +19,7 @@ import it.uniroma3.siw.model.Car;
 import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.Supplier;
 import it.uniroma3.siw.model.Optional;
+
 import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.service.CarService;
 import it.uniroma3.siw.service.CredentialsService;
@@ -65,6 +66,17 @@ public class CarController {
 		return "cars.html";
 	}
 	
+	@GetMapping("/supplier/manageCars")
+	public String manageCars(Model model) {
+		UserDetails u=gc.getUser();
+		String username=u.getUsername();
+		Credentials credenziali=this.credentialsService.getCredentials(username);
+		User utenteCorrente=credenziali.getUser();
+		Supplier fornitoreCorrente= utenteCorrente.getSupplier();
+		model.addAttribute("cars", fornitoreCorrente.getCars());
+		return "supplier/manageCars.html";
+	}
+	
 	@GetMapping("/supplier/addCar")
 	public String formNewCar(Model model) {
 		Car car=new Car();
@@ -72,6 +84,39 @@ public class CarController {
 		
 		return "supplier/addCar.html";
 	}
+	
+	@GetMapping("supplier/FormUpdateCar/{id}")
+	public String UpdateCar(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("car", this.carService.findById(id));
+		return "supplier/formUpdateCar.html";
+	}
+	
+	@GetMapping("supplier/removeCar/{id}")
+	public String removeCar(@PathVariable("id")Long id, Model model) {
+		Car car=this.carService.findById(id);
+		Supplier s=car.supplier;
+		if(s!=null) {
+			s.getCars().remove(car);
+		}
+		/* DA IMPLEMENTARE CON OPTIONAL
+		if(recipe.getIngredients().isEmpty()) {
+				this.recipeService.delete(recipe);
+				return "cookUser/index.html";
+		}
+		else {
+				for (RecipeIngredient ing: recipe.getIngredients()) {
+					ing.setRecipe(null);
+					this.recipeIngredientService.remove(ing);
+				}
+				recipe.getIngredients().removeAll(recipe.getIngredients());
+				
+		}
+		*/
+		
+		this.carService.delete(car);
+		return "/supplier/index.html";
+	}
+	
 	
 	@PostMapping("/car")
 	public String newCar(@Valid @ModelAttribute("car") Car car , BindingResult carBindingResult) {
@@ -96,6 +141,53 @@ public class CarController {
 				return "/admin/addCar.hmtl";
 		}
 	}
+	
+	@GetMapping("/admin/addCar")
+	public String AdminformNewCar(Model model) {
+		Car car=new Car();
+		model.addAttribute("car", car);
+		return "admin/addCar.html";
+	}
+	
+	@GetMapping("admin/manageCars")
+	public String AdminManageCars(Model model) {
+		model.addAttribute("cars",this.carService.findAll());
+		return "admin/manageCars.html";
+	}
+	@GetMapping("admin/FormUpdateCar/{id}")
+	public String AdminUpdateCar(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("car", this.carService.findById(id));
+		return "admin/formUpdateCar.html";
+	}
+	
+	@GetMapping("admin/removeCar/{id}")
+	public String AdminremoveCar(@PathVariable("id")Long id, Model model) {
+		Car car=this.carService.findById(id);
+		Supplier s=car.supplier;
+		if(s!=null) {
+			s.getCars().remove(car);
+		}
+		/* Optional Da Implementare
+		if(recipe.getIngredients().isEmpty()) {
+				this.recipeService.delete(recipe);
+				return "admin/index.html";
+		}
+		else {
+				for (RecipeIngredient ing: recipe.getIngredients()) {
+					ing.setRecipe(null);
+					this.recipeIngredientService.remove(ing);
+				}
+				recipe.getIngredients().removeAll(recipe.getIngredients());
+				
+		}
+		*/
+		
+		this.carService.delete(car);
+		return "/admin/index.html";
+	
+		
+	}
+	
 	
 
 }
