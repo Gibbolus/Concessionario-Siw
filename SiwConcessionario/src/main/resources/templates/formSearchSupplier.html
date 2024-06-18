@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+ <head>
+	<title>Cerca Fornitore</title>
+	<link rel="stylesheet" href="/stile.css?version=3" />
+ </head>
+ <body>
+	 <div> <a href="/"> <img src="/images/logo-siw.png" width=50% /></a> </div>
+	 <h1>Immetti il cognome</h1>
+		<form th:action="@{/formSearchSupplier}" method="post">
+			<label for="cognome">Cognome:</label>
+			<input type="text" id="surname" name="surname"/>
+			<div>
+				<span><button type="submit">Conferma</button></span>
+			</div>
+		</form> 
+	 </body>	
+</html>

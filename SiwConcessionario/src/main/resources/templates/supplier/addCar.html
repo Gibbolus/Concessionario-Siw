@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+ <head>
+	<title>Nuova Ricetta</title>
+	<link rel="stylesheet" href="/stile.css?version=3" />
+ </head>
+ <body>
+	 <div> <a href="/"> <img src="/logo-siw.png" width=50% /></a> </div>
+	 <h1>Aggiungi una macchina</h1>
+		<form th:action="@{/car}" method="POST" th:object="${car}">
+			<div th:if="${#fields.hasGlobalErrors()}">
+				<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+			</div>
+			<div>
+				Modello: <span> <input required type="text" th:field="${car.modello}"/></span>
+				<span th:if="${#fields.hasErrors('modello')}" th:errors="*{modello}">
+            	</span>
+			</div>
+			<div>
+				Marca: <span> <input required type="text" th:field="${car.marca}" /></span>
+			</div>
+			<div>
+				Km percorsi: <span> <input type="number" th:field="${car.km}"/></span>
+			</div>
+			<div>
+				Immagine: <span>> <input type="url" th:field="${car.urlImage}"></span>
+			</div>
+			<div>
+				<span><button type="submit">Conferma</button></span>
+			</div>
+		</form> 
+	 </body>	
+</html>

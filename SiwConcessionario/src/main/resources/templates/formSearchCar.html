@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+ <head>
+	<title>Cerca Macchina</title>
+	<link rel="stylesheet" href="/stile.css?version=3" />
+ </head>
+ <body>
+	 <div> <a href="/"> <img src="/images/logo-siw.png" width=50% /></a> </div>
+	 <h1>Immetti il modello della Macchina</h1>
+		<form th:action="@{/formSearchCar}" method="post">
+			<label for="name">Nome:</label>
+			<input type="text" id="modello" th:value="${modello}" name="modello"/>
+			<div>
+				<span><button type="submit">Conferma</button></span>
+			</div>
+		</form> 
+	 </body>	
+</html>

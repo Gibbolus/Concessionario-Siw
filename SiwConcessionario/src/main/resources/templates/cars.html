@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		<title> Catalogo Macchine</title>
+		<link rel="stylesheet" href="/stile.css?version=2" />
+	</head>
+	
+	<body>
+		<div> <a href="/"> <img src="/images/logo-siw.png" width="50%"/> </a> </div>
+		<h1> Macchine</h1>
+		<div th:if="${cars.isEmpty()}">Non ci sono macchine nel sistema</div>
+		<ul>
+			<li th:each="car : ${cars}">
+				<a th:href="@{'/car' + '/' + ${car.id}}"
+				 th:text="${car.modello} +' ' +${car.marca}">Up</a>	
+			</li>
+		</ul>
+	</body>
+</html>

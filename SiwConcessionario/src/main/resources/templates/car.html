@@ -1,0 +1,31 @@
+<!DOCTYPE hmtl>
+<html>
+	<head>
+		<title> Macchina</title>
+		<link rel="stylesheet" href="7stile.css?version=2" />
+	</head>
+	
+	<body>
+		<div><a href="/"><img src="/images/logo-siw.png" width="50%" /></a></div>
+		<div th:if="${car}">
+			<h1 th:text="${car.modello}"> Nome:</h1>
+			<div>Marca: <span: th:text="${car.marca}">10</span:></div>
+			<div> Km percorsi: <span: th:text="${car.km}">2000</span:></div>	
+			<div>Fornitore: 
+				<span: th:if="${car.supplier!=null}">
+				<span th:text="${car.supplier.name} +' '+ ${car.supplier.surname}">Geronimo Stilton</span>
+				</span>
+				<span th:unless="${car.supplier!=null}">
+					Non disponibile
+				</span>
+				Lista Optional:
+				<div th:if="${car.optionals.isEmpty()}">Lista degli optional non disponibile</div>
+					<li th:each="optional : ${car.optionals}">
+						<span th:text="${optional.name}"></span>	
+					</li>
+				</div>
+			<span> <img width="30%" th:src="${car.urlImage}"/></span>
+		</div>
+		<div th:unless="${car}">Non esiste</div>
+	</body>	
+</html>

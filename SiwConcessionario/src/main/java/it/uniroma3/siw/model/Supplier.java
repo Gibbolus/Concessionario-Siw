@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Supplier{
+public class Supplier {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,14 +23,14 @@ public class Supplier{
 		this.id = id;
 	}
 	
-	@OneToMany
+	@OneToMany(mappedBy="supplier")
 	List<Car> cars;
 
-	public List<Car> getRecipes() {
+	public List<Car> getCars() {
 		return cars;
 	}
 
-	public void setRecipes(List<Car> recipes) {
+	public void setCars(List<Car> recipes) {
 		this.cars = recipes;
 	}
 	
