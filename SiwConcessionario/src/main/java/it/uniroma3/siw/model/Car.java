@@ -38,6 +38,8 @@ public class Car {
 	@ManyToOne
 	public Supplier supplier;
 	
+
+	
 	public Supplier getSupplier() {
 		return supplier;
 	}
@@ -48,13 +50,13 @@ public class Car {
 
 
 	@OneToMany
-	public List<Optional> optionals;
+	public List<OptionalCar> optionals;
 	
-	public List<Optional> getOptionals() {
+	public List<OptionalCar> getOptionals() {
 		return optionals;
 	}
 
-	public void setOptionals(List<Optional> optionals) {
+	public void setOptionals(List<OptionalCar> optionals) {
 		this.optionals = optionals;
 	}
 

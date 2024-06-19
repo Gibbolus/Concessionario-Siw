@@ -19,7 +19,7 @@ import it.uniroma3.siw.model.Car;
 import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.Supplier;
 import it.uniroma3.siw.model.Optional;
-
+import it.uniroma3.siw.model.OptionalCar;
 import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.service.CarService;
 import it.uniroma3.siw.service.CredentialsService;
@@ -126,7 +126,7 @@ public class CarController {
 		User utenteCorrente=credenziali.getUser();
 		Supplier fornitore= utenteCorrente.getSupplier();
 		car.setSupplier(fornitore);
-		car.optionals=new ArrayList<Optional>();
+		car.optionals=new ArrayList<OptionalCar>();
 		
 		this.carValidator.validate(car, carBindingResult);
 		if(!carBindingResult.hasErrors()) {
