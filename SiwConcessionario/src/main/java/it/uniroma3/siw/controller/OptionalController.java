@@ -48,10 +48,10 @@ public class OptionalController {
 		return "admin/formNewOptional.html";
 	}
 	
-	@GetMapping("/supplier/formNewIngredient")
+	@GetMapping("/supplier/formNewOptional")
 	public String formNewOptional(Model model) {
 		Optional opt=new Optional();
-		model.addAttribute("ingredient",opt);
+		model.addAttribute("optional",opt);
 		
 		return "supplier/formNewOptional.html";
 	}
@@ -102,7 +102,7 @@ public class OptionalController {
 		return "admin/manageOptionals.html";
 	}
 	
-	@GetMapping("cookUser/manageOptionals/{id}")
+	@GetMapping("supplier/manageOptionals/{id}")
 	public String manageIngredients(@PathVariable("id") Long id, Model model) {
 		Car car=this.carService.findById(id);
 		model.addAttribute("car",car);

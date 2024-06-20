@@ -27,7 +27,7 @@ public class SupplierValidator implements Validator{
 			
 			if(s.getName()!=null && s.getSurname()!=null && s.getBirth()!=null 
 					&& supplierService.existsByNameSurnameBirth(s)) {
-				errors.reject("cook.duplicate");
+				errors.reject("supplier.duplicate");
 			}
 			if(s.getBirth().getYear()<1900 || s.getBirth().getYear()>2024) {
 				errors.reject("birth.error");

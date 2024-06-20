@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+ <head>
+	<title>Aggiungi Optional</title>
+	<link rel="stylesheet" href="/stile.css?version=3" />
+ </head>
+ <body>
+	 <div> <a href="/"> <img src="/logo-siw.png" width=50% /></a> </div>
+	 <h1>Nuovo Optional:</h1>
+		<form th:action="@{/optional}" method="POST" th:object="${optional}">
+			<div th:if="${#fields.hasGlobalErrors()}">
+				<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+			</div>
+			<div>
+				Nome: <span> <input required type="text" th:field="${optional.name}"/></span>
+				<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+            	</span>
+			</div>
+			
+			<div>
+				<span><button type="submit">Conferma</button></span>
+			</div>
+		</form> 
+	 </body>	
+</html>

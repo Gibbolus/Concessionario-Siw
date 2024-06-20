@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		<title> Elenco Fornitori</title>
+		<link rel="stylesheet" href="/stile.css?version=2" />
+	</head>
+	
+	<body>
+		<div> <a href="/"> <img src="/images/logo-siw.png" width="50%"/> </a> </div>
+		<h1> Fornitori</h1>
+		<div th:if="${suppliers.isEmpty()}">Non ci sono fornitori nel sistema</div>
+		<ul>
+			<li th:each="supplier : ${suppliers}">
+				<a th:text="${supplier.name} + ' ' + ${supplier.surname}">Up!</a>
+				<a th:href="@{'/admin/removeSupplier/' + ${supplier.id} }">Rimuovi fornitore</a>
+			</li>
+		</ul>
+	</body>
+</html>

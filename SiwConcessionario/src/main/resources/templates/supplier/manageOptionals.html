@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Modifica lista degli optional</title>
+		<link rel="stylesheet" href="/stile.css?version=2" />
+	</head>
+	
+	<body>
+		<div><a href="/"><img src="/images/logo-siw.png" width="50%" /></a></div>
+		<h1> Aggiungi ingrediente:</h1>
+		<div th:if="${car.optionals.isEmpty()}">La macchina non ha ancora optionals </div>
+		<div th:unless="${car.optionals.isEmpty()}">
+			<li th:each="optionalCar : ${car.optionals}">
+				<a th:text="${optionalCar.opt.name}">Up!</a>
+				<a th:href="@{'/supplier/removeOptional/' + ${car.id} +'/' +${optionalCar.id}}">(Rimuovi)</a>
+			</li>
+		</div>
+		<ul>
+			<div th:if="${optionals.isEmpty()}">Non ci sono optionals disponibili </div>
+			<div th:unless="${optionals.isEmpty()}">
+				<li th:each="optional : ${optionals}">
+					<a th:text="${optional.name}">Up!</a>
+					<a th:href="@{'/supplier/setOptionalToCar/' + ${car.id} +'/' +${optional.id}}">Aggiungi optional alla macchina </a>
+				</div>
+				</li>
+			</li>
+		</ul>
+	</body>
+</html>

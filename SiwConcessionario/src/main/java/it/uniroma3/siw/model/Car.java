@@ -49,7 +49,7 @@ public class Car {
 	}
 
 
-	@OneToMany
+	@OneToMany(mappedBy="car")
 	public List<OptionalCar> optionals;
 	
 	public List<OptionalCar> getOptionals() {

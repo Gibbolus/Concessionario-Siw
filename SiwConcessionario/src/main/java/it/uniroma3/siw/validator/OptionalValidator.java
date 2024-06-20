@@ -24,7 +24,7 @@ public class OptionalValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		Optional opt=(Optional) target;
 		if(this.optionalService.existsByName(opt.getName())) {
-			errors.reject("ingredient.duplicate");
+			errors.reject("optional.duplicate");
 		}
 		
 	}

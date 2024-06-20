@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		<title> Elenco Optionals</title>
+		<link rel="stylesheet" href="/stile.css?version=2" />
+	</head>
+	
+	<body>
+		<div> <a href="/"> <img src="/images/logo-siw.png" width="50%"/> </a> </div>
+		<h1> Optionals:</h1>
+		<div th:if="${optionals.isEmpty()}">Non ci sono optionals nel sistema</div>
+		<ul>
+			<li th:each="optional : ${optionals}">
+				<span th:text="${optional.name}"></span>	
+			</li>
+		</ul>
+	</body>
+</html>

@@ -23,6 +23,7 @@ import it.uniroma3.siw.model.OptionalCar;
 import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.service.CarService;
 import it.uniroma3.siw.service.CredentialsService;
+import it.uniroma3.siw.service.OptionalCarService;
 import it.uniroma3.siw.validator.CarValidator;
 import jakarta.persistence.EntityManager;
 import jakarta.validation.Valid;
@@ -31,6 +32,8 @@ import jakarta.validation.Valid;
 public class CarController {
 	
 	@Autowired CarService carService;
+	
+	@Autowired OptionalCarService optCarService;
 	
 	@Autowired GlobalController gc;
 	
@@ -98,23 +101,23 @@ public class CarController {
 		if(s!=null) {
 			s.getCars().remove(car);
 		}
-		/* DA IMPLEMENTARE CON OPTIONAL
-		if(recipe.getIngredients().isEmpty()) {
-				this.recipeService.delete(recipe);
-				return "cookUser/index.html";
+		
+		if(car.getOptionals().isEmpty()) {
+				this.carService.delete(car);
+				return "supplier/index.html";
 		}
 		else {
-				for (RecipeIngredient ing: recipe.getIngredients()) {
-					ing.setRecipe(null);
-					this.recipeIngredientService.remove(ing);
+				for (OptionalCar optCar: car.getOptionals()) {
+					optCar.setCar(null);
+					this.optCarService.remove(optCar);
 				}
-				recipe.getIngredients().removeAll(recipe.getIngredients());
+				car.getOptionals().removeAll(car.getOptionals());
 				
 		}
-		*/
+		
 		
 		this.carService.delete(car);
-		return "/supplier/index.html";
+		return "supplier/index.html";
 	}
 	
 	
@@ -167,23 +170,24 @@ public class CarController {
 		if(s!=null) {
 			s.getCars().remove(car);
 		}
-		/* Optional Da Implementare
-		if(recipe.getIngredients().isEmpty()) {
-				this.recipeService.delete(recipe);
-				return "admin/index.html";
+		
+		if(car.getOptionals().isEmpty()) {
+				this.carService.delete(car);
+				return "supplier/index.html";
 		}
 		else {
-				for (RecipeIngredient ing: recipe.getIngredients()) {
-					ing.setRecipe(null);
-					this.recipeIngredientService.remove(ing);
+				for (OptionalCar optCar: car.getOptionals()) {
+					optCar.setCar(null);
+					this.optCarService.remove(optCar);
 				}
-				recipe.getIngredients().removeAll(recipe.getIngredients());
+				car.getOptionals().removeAll(car.getOptionals());
 				
 		}
-		*/
 		
+		
+	
 		this.carService.delete(car);
-		return "/admin/index.html";
+		return "admin/index.html";
 	
 		
 	}
