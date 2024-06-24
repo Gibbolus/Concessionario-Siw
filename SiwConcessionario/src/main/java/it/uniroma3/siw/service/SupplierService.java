@@ -17,7 +17,7 @@ public class SupplierService {
 	
 	public Supplier findById( Long id) {
 		return supplierRepository.findById(id).get();
-		}
+	}
 	
 	public Iterable<Supplier> findAll(){
 		return supplierRepository.findAll();

@@ -1,18 +1,50 @@
 <!DOCTYPE hmtl>
 <html>
-	<head>
-		<title> Macchina</title>
-		<link rel="stylesheet" href="7stile.css?version=2" />
-	</head>
-	
-	<body>
-		<div><a href="/"><img src="/images/logo-siw.png" width="50%" /></a></div>
-		<div th:if="${car}">
-			<h1 th:text="${car.modello}"> Nome:</h1>
-			<div>Marca: <span: th:text="${car.marca}">10</span:></div>
-			<div> Km percorsi: <span: th:text="${car.km}">2000</span:></div>	
-			<div>Fornitore: 
-				<span: th:if="${car.supplier!=null}">
+
+<head>
+	<title> Macchina</title>
+    <link rel="stylesheet" href="/css/model-style.css" />
+</head>
+
+<body>
+
+	<nav class="nav-bar">
+		<a href="/">
+			<img class="icons-home" src="/images/home.png"></img>
+		</a>
+		<h3 class="siw-text"> SiwConcessionario </h3>
+		<ul class="nav-menu">
+			<li class="nav-item">
+				<a class="ali" href="/car">Catalogo</a>
+			</li>
+			<li class="nav-item">
+				<a class="ali" href="/supplier">Fornitori</a>
+			</li>
+			<li class="nav-item">
+				<div class="account-reg-log">
+					<a id="reg-button" class="reg-log-button" href="/register"> Registrati </a>
+					<a class="reg-log-button" href="/login"> Login </a>
+				</div>
+			</li>
+		</ul>
+		<div class="hamburger">
+			<span class="bar"></span>
+			<span class="bar"></span>
+			<span class="bar"></span>
+		</div>
+	</nav>
+
+
+
+	<div><a href="/"><img src="/images/logo-siw.png" width="50%" /></a></div>
+	<div th:if="${car}">
+		<h1 th:text="${car.modello}"> Nome:</h1>
+		<div>Marca: <span: th:text="${car.marca}">10</span:>
+		</div>
+		<div> Km percorsi: <span: th:text="${car.km}">2000</span:>
+		</div>
+		<div>Fornitore:
+			<span: th:if="${car.supplier!=null}">
 				<span th:text="${car.supplier.name} +' '+ ${car.supplier.surname}">Geronimo Stilton</span>
 				</span>
 				<span th:unless="${car.supplier!=null}">
@@ -20,12 +52,26 @@
 				</span>
 				Lista Optional:
 				<div th:if="${car.optionals.isEmpty()}">Lista degli optional non disponibile</div>
-					<li th:each="optional : ${car.optionals}">
-						<span th:text="${optional.name}"></span>	
-					</li>
-				</div>
-			<span> <img width="30%" th:src="${car.urlImage}"/></span>
+				<li th:each="optional : ${car.optionals}">
+					<span th:text="${optional.name}"></span>
+				</li>
 		</div>
-		<div th:unless="${car}">Non esiste</div>
-	</body>	
+		<span> <img width="30%" th:src="${car.urlImage}" /></span>
+	</div>
+	<div th:unless="${car}">Non esiste</div>
+	
+	 <script>
+		const hamburger = document.querySelector(".hamburger");
+		const navMenu = document.querySelector(".nav-menu");
+		hamburger.addEventListener("click", () => {
+			hamburger.classList.toggle("active");
+			navMenu.classList.toggle("active");
+		})
+		document.querySelectorAll(".nav-link").forEach(n => n.addeaddEventListener("click", () => {
+			hamburger.classList.remove("active");
+			navMenu.classList.remove("active");
+		}))
+	</script>
+</body>
+
 </html>

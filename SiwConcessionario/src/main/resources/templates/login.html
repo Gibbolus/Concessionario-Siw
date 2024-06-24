@@ -1,33 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/login.css">
-    <title>SiwConcessionario-Login</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/login.css">
+	<title>SiwConcessionario - Login</title>
 </head>
+
 <body>
-	
-	<form th:action="@{/login}", method="POST">
-    <div class="login-box">
-        <div class="login-header">
-            <header>Login</header>
-        </div>
-        <div class="input-box">
-            <input type="text" name="username" class="input-field" placeholder="Username" autocomplete="off" required>
-        </div>
-        <div class="input-box">
-            <input type="password" name="password" class="input-field" placeholder="Password" autocomplete="off" required>
-        </div>
-        <div class="input-submit">
-            <button class="submit-btn" id="submit"></button>
-            <label for="submit">Entra</label>
-         </form>
-        </div>
-        <div class="sign-up-link">
-            <p>Non hai un account? <a href="/register">Registrati</a></p>
-        </div>
-    </div>
+	<nav class="nav-bar">
+		<a href="/">
+			<img class="icons-home" src="/images/home.png"></img>
+		</a>
+		<ul class="nav-menu">
+			<li class="nav-item">
+				<a class="ali" href="/car">Catalogo</a>
+			</li>
+			<li class="nav-item">
+				<a class="ali" href="/supplier">Fornitori</a>
+			</li>
+			<li class="nav-item">
+				<div class="account-reg-log">
+					<a id="reg-button" class="reg-log-button" href="/register"> Registrati </a>
+					<a class="reg-log-button" href="/login"> Login </a>
+				</div>
+			</li>
+		</ul>
+		<div class="hamburger">
+			<span class="bar"></span>
+			<span class="bar"></span>
+			<span class="bar"></span>
+		</div>
+	</nav>
+
+	<form class="center" th:action="@{/login}" , method="POST">
+		<div class="login-box">
+			<div class="login-header">
+				<header>Login</header>
+			</div>
+			<div class="input-box">
+				<input type="text" name="username" class="input-field" placeholder="Username" autocomplete="off"
+					required>
+			</div>
+			<div class="input-box">
+				<input type="password" name="password" class="input-field" placeholder="Password" autocomplete="off"
+					required>
+			</div>
+			<div class="input-submit">
+				<button class="submit-btn" id="submit"></button>
+				<label for="submit">Entra</label>
+			</div>
+		</div>
+	</form>
+	<div class="sign-up-link">
+		<p>Non hai un account? <a href="/register">Registrati</a></p>
+	</div>
+	</div>
 </body>
+
 </html>

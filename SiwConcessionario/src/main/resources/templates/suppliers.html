@@ -1,20 +1,70 @@
 <!DOCTYPE html>
-<html>
-	
-	<head>
-		<title> Fornitori</title>
-		<link rel="stylesheet" href="/stile.css?version=2" />
-	</head>
-	
-	<body>
-		<div> <a href="/"> <img src="/images/logo-siw.png" width="50%"/> </a> </div>
-		<h1> Fornitori</h1>
-		<div th:if="${suppliers.isEmpty()}">Non ci sono fornitori nel sistema</div>
-		<ul>
-			<li th:each="supplier : ${suppliers}">
-				<a th:href="@{'/supplier' + '/' + ${supplier.id}}"
-				 th:text="${supplier.name} +' ' +${supplier.surname}">Up! (2000)</a>	
+<html lang="it">
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<title> Fornitori</title>
+	<link rel="stylesheet" href="css/model-style.css?version=2" />
+</head>
+
+<body>
+	<nav class="nav-bar">
+		<a href="/">
+			<img class="icons-home" src="/images/home.png"></img>
+		</a>
+		<div class="search-bar">
+			<div class="search-box">
+				<form th:action="@{/formSearchSuppliers}" method="post">
+					<input id="search-input" type="text" th:value="${name}" name="name"
+						placeholder="Cerca un fornitore..." />
+				</form>
+			</div>
+		</div>
+		<ul class="nav-menu">
+			<li class="nav-item">
+				<a class="ali" href="/car">Catalogo</a>
+			</li>
+			<li class="nav-item">
+				<a class="ali" href="/supplier">Fornitori</a>
+			</li>
+			<li class="nav-item">
+				<div class="account-reg-log">
+					<a id="reg-button" class="reg-log-button" href="/register"> Registrati </a>
+					<a class="reg-log-button" href="/login"> Login </a>
+				</div>
 			</li>
 		</ul>
-	</body>
+		<div class="hamburger">
+			<span class="bar"></span>
+			<span class="bar"></span>
+			<span class="bar"></span>
+		</div>
+	</nav>
+	
+	<h1 class="center"> Fornitori</h1>
+	<div class="empty-text" th:if="${suppliers.isEmpty()}">Non ci sono fornitori nel sistema</div>
+	<ul>
+		<li th:each="supplier : ${suppliers}">
+			<a th:href="@{'/supplier' + '/' + ${supplier.id}}" th:text="${supplier.name} +' ' +${supplier.surname}">Up!
+				(2000)</a>
+		</li>
+	</ul>
+	
+	
+	
+	<script>
+		const hamburger = document.querySelector(".hamburger");
+		const navMenu = document.querySelector(".nav-menu");
+		hamburger.addEventListener("click", () => {
+			hamburger.classList.toggle("active");
+			navMenu.classList.toggle("active");
+		})
+		document.querySelectorAll(".nav-link").forEach(n => n.addeaddEventListener("click", () => {
+			hamburger.classList.remove("active");
+			navMenu.classList.remove("active");
+		}))
+	</script>
+</body>
+
 </html>

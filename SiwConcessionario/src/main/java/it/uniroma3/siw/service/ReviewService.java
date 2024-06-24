@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.uniroma3.siw.model.Car;
+import it.uniroma3.siw.model.Review;
 import it.uniroma3.siw.model.Supplier;
 import it.uniroma3.siw.repository.ReviewRepository;
 
@@ -17,5 +18,20 @@ public class ReviewService{
 	public boolean existsBySupplierAndCar(Supplier s, Car c) {
 		return this.reviewRepository.existsBySupplierAndCar(s,c);
 	}
+	
+	public Review findById( Long id) {
+		return reviewRepository.findById(id).get();
+	}
+	
+	public Iterable<Review> findAll(){
+		return reviewRepository.findAll();
+	}
 
+	public void save(Review s) {
+		reviewRepository.save(s);
+	}
+	
+	public void remove(Review s) {
+		reviewRepository.delete(s);
+	}
 }
