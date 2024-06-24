@@ -22,7 +22,7 @@
             	</span>
 			</div>
 			<div>
-				Data di Nascita: <span> <input type="date" th:field="${supplier.birth}"/></span>
+				Data di Nascita: <span> <input required type="date" th:field="${supplier.birth}"/></span>
 				<span th:if="${#fields.hasErrors('birth')}" th:errors="*{birth}">
             	</span>
 			</div>
