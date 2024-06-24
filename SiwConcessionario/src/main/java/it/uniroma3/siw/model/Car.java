@@ -25,7 +25,8 @@ public class Car {
 		this.id = id;
 	}
 	
-	
+	@OneToMany
+	public List<Review> recensioni;
 
 	private String modello;
 	

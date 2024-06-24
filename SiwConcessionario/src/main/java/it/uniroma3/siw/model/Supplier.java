@@ -25,6 +25,9 @@ public class Supplier {
 	
 	@OneToMany(mappedBy="supplier")
 	List<Car> cars;
+	
+	@OneToMany(mappedBy="supplier")
+	public List<Review> recensioni;
 
 	public List<Car> getCars() {
 		return cars;
