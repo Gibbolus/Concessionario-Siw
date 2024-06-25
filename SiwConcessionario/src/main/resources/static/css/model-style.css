@@ -94,6 +94,38 @@ a:hover{
 	margin-top: 4%;
 }
 
+.container{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin: 2% 3%; 
+	gap: 50px;
+}
+
+.main-container{
+	height: 22rem;
+	width: 22rem;
+	background-color: white;
+	align-content: center;
+	text-align: center;
+	border-radius: 50px;
+	box-shadow: 0 0 5px 1px black;
+}
+
+.img{
+	max-height: 20rem;
+	max-width: 20rem;
+	width: auto;
+	border-radius: 50px;
+	box-shadow: black 1px 1px 5px;
+}
+
+.car-text{
+	margin: auto auto 5% auto;
+	text-align: center;
+}
+
 .search-bar {
 	margin-left: 7%;
 	margin-right: -7%;

@@ -103,7 +103,7 @@ a:hover {
 }
 
 
-.img-car{
+.img{
 	margin-top: 4%;
 	height: auto;
 	width: 45rem;
@@ -116,6 +116,10 @@ a:hover {
 	flex-direction: column;
 	font-size: x-large;
 	width: 40%;
+}
+
+#text-sup{
+	text-align: center;
 }
 
 #fornitore{

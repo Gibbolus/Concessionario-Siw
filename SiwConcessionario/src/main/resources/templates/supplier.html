@@ -1,11 +1,11 @@
 <!DOCTYPE hmtl>
 <html lang="it">
-	
+
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
 	<title> Fornitore</title>
-	<link rel="stylesheet" href="css/model-style.css?version=2" />
+	<link rel="stylesheet" href="/css/car-sup.css?version=2" />
 </head>
 
 <body>
@@ -13,14 +13,7 @@
 		<a href="/">
 			<img class="icons-home" src="/images/home.png"></img>
 		</a>
-		<div class="search-bar">
-			<div class="search-box">
-				<form th:action="@{/formSearchSuppliers}" method="post">
-					<input id="search-input" type="text" th:value="${name}" name="name"
-						placeholder="Cerca un fornitore..." />
-				</form>
-			</div>
-		</div>
+		<h3 class="siw-text"> SiwConcessionario </h3>
 		<ul class="nav-menu">
 			<li class="nav-item">
 				<a class="ali" href="/car">Catalogo</a>
@@ -41,17 +34,29 @@
 			<span class="bar"></span>
 		</div>
 	</nav>
-	
-	<div><a href="/"><img src="/images/logo-siw.png" width="50%" /></a></div>
+
 	<div th:if="${supplier}">
-		<h1 th:text="${supplier.name}+ ' ' + ${supplier.surname} "> Nome Cognome</h1>
-		<div> Data di Nascita: <span: th:text="'('+ ${supplier.birth} +')'">2000</span:>
+		<div class="title">
+			<h2 th:text="${supplier.name}+ ' ' + ${supplier.surname} "> Nome Cognome</h2>
 		</div>
-		<span> <img width="30%" th:src="${supplier.urlImage}" /></span>
+		<div class="img-text">
+			<div>
+				<img class="img" th:if="${supplier.urlImage.startsWith('https')}" th:src="${supplier.urlImage}">
+				<img class="img" th:unless="${supplier.urlImage.startsWith('https')}"
+					th:src="@{/images/__${supplier.urlImage}__}">
+			</div>
+			<div class="infos" id="text-sup">
+				<br>
+				<span> Fondato il:
+					<span th:text="${#temporals.format(supplier.birth, 'dd-MM-yyyy')}"> anno </span>
+				</span>
+			</div>
+		</div>
 	</div>
+
 	<div th:unless="${supplier}">Non esiste</div>
-	
-	
+
+
 	<script>
 		const hamburger = document.querySelector(".hamburger");
 		const navMenu = document.querySelector(".nav-menu");
