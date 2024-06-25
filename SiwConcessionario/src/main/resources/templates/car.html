@@ -1,9 +1,11 @@
 <!DOCTYPE hmtl>
-<html>
+<html lang="it">
 
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
 	<title> Macchina</title>
-    <link rel="stylesheet" href="/css/model-style.css" />
+	<link rel="stylesheet" href="/css/car.css" />
 </head>
 
 <body>
@@ -35,32 +37,46 @@
 	</nav>
 
 
-
-	<div><a href="/"><img src="/images/logo-siw.png" width="50%" /></a></div>
 	<div th:if="${car}">
-		<h1 th:text="${car.modello}"> Nome:</h1>
-		<div>Marca: <span: th:text="${car.marca}">10</span:>
+		<div class="title">
+			<h3 th:text="${car.marca}"> Nome Marca </h3>&nbsp; <!--&nbsp; serve per creare uno spazio-->
+			<h3 th:text="${car.modello}"> Nome Modello </h3>
 		</div>
-		<div> Km percorsi: <span: th:text="${car.km}">2000</span:>
+		<div class="img-text">
+			<div>
+				<img class="img-car" th:if="${car.urlImage.startsWith('https')}" th:src="${car.urlImage}">
+				<img class="img-car" th:unless="${car.urlImage.startsWith('https')}"
+					th:src="@{/images/__${car.urlImage}__}">
+			</div>
+			<div class="infos">
+				<br>
+				<span> Km percorsi:
+					<span th:text="${car.km}"> num di km </span>
+				</span>
+				<div  class="optional" th:if="${car.optionals.isEmpty()}">Lista degli optional non disponibile</div>
+				<div class="optional" th:unless="${car.optionals.isEmpty()}">
+					<span> Lista degli optional: </span>
+					<ul>
+						<div>
+							<li  th:each="optional : ${car.optionals}">
+								<span th:text="${optional.name}"></span>
+							</li>
+						</div>
+					</ul>
+				</div>
+			</div>
 		</div>
-		<div>Fornitore:
-			<span: th:if="${car.supplier!=null}">
+		<div id="fornitore"> Fornitore:
+			<span th:if="${car.supplier!=null}">
 				<span th:text="${car.supplier.name} +' '+ ${car.supplier.surname}">Geronimo Stilton</span>
-				</span>
-				<span th:unless="${car.supplier!=null}">
-					Non disponibile
-				</span>
-				Lista Optional:
-				<div th:if="${car.optionals.isEmpty()}">Lista degli optional non disponibile</div>
-				<li th:each="optional : ${car.optionals}">
-					<span th:text="${optional.name}"></span>
-				</li>
+			</span>
+			<span th:unless="${car.supplier!=null}">Non disponibile</span>
 		</div>
-		<span> <img width="30%" th:src="${car.urlImage}" /></span>
 	</div>
+
 	<div th:unless="${car}">Non esiste</div>
-	
-	 <script>
+
+	<script>
 		const hamburger = document.querySelector(".hamburger");
 		const navMenu = document.querySelector(".nav-menu");
 		hamburger.addEventListener("click", () => {

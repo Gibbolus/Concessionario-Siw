@@ -109,10 +109,11 @@ a:hover{
 	display: flex;
 	align-items: center;
 	padding: 0 1rem;
+	width: 30vh;
 }
 
 #search-input {
-	width: 300px;
+	width: 100%;
 	margin-left: 5px;
 }
 
@@ -131,25 +132,37 @@ a:hover{
 	font-weight: 500;
 }
 
+@media(max-width: 950px){
+	#search-input {
+		width: 97%;
+		margin-left: 5px;
+	}
+}
+
 
 @media(max-width: 768px){
 	
+	.icons-home{
+		margin: 0;
+	}
+	
+	.search-bar{
+		width: 50%;
+		margin: 0;
+	}
+	
+	#search-input{
+		width: 110%;
+	}
+	
 	.nav-bar{
 		min-height: 70px;
-		background-color: #dfdfdf;
-		box-shadow: 0 2px black;
-		display: flex;
 		justify-content: space-between;
-		align-items: center;
 		padding: 0 24px;
 	}
 	
 	.ali{
 		transition: 0.7s ease;
-	}
-	
-	.ali:hover{
-		color: aliceblue;
 	}
 	
 	.hamburger{
@@ -178,13 +191,12 @@ a:hover{
 	}
 	
 	.nav-menu{
-		display: flex;
 		position: fixed;
 		padding: 0 50px 20px 0;
 		right: -36%;
 		top: 77px;
 		flex-direction: column;
-		background-color: #dfdfdf;
+		background-color: white;
 		box-shadow: -1px 1px 5px #222;
 		width: 35%;
 		transition: 0.3s;
@@ -203,16 +215,11 @@ a:hover{
 		right: -9%;
 	}
 	
-	.ali{
-		text-decoration: none;
-		color: black;
-	}
-	
 	.reg-log-button{
 		height: 140%;
 		margin: 5px;
 		width: 130%;
-		background-color: #222;
+		background-color: #dfdfdf;
 	}
 }
 
@@ -223,6 +230,9 @@ a:hover{
 		width: 45%;
 		right: -46%;
 	}
-
+	
+	#search-input{
+		width: 90%;
+	}
 
 }

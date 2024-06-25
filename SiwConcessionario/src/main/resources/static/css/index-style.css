@@ -17,9 +17,9 @@ body{
 	position: sticky;
 	height: 75px;
 	display: flex;
-  	align-items: center;
-  	margin-bottom: 2%;
-  	padding-left: 10%;
+	align-items: center;
+	margin-bottom: 2%;
+	padding-left: 10%;
 }
 
 .siw-text{
@@ -91,20 +91,12 @@ a:hover{
 	
 	.nav-bar{
 		min-height: 70px;
-		background-color: #dfdfdf;
-		box-shadow: 0 2px black;
-		display: flex;
 		justify-content: space-between;
-		align-items: center;
 		padding: 0 24px;
 	}
 	
 	.ali{
 		transition: 0.7s ease;
-	}
-	
-	.ali:hover{
-		color: aliceblue;
 	}
 	
 	.hamburger{
@@ -133,18 +125,18 @@ a:hover{
 	}
 	
 	.nav-menu{
-		display: flex;
 		position: fixed;
 		padding: 0 50px 20px 0;
 		right: -36%;
 		top: 77px;
 		flex-direction: column;
-		background-color: #dfdfdf;
+		background-color: white;
 		box-shadow: -1px 1px 5px #222;
 		width: 35%;
 		transition: 0.3s;
 		border-radius: 50px;
 	}
+	
 	
 	.siw-text{
 		display: flex;
@@ -158,16 +150,11 @@ a:hover{
 		right: -9%;
 	}
 	
-	.ali{
-		text-decoration: none;
-		color: black;
-	}
-	
 	.reg-log-button{
 		height: 140%;
 		margin: 5px;
 		width: 130%;
-		background-color: #222;
+		background-color: #dfdfdf;
 	}
 }
 

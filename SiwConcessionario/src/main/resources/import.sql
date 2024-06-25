@@ -1,0 +1,1 @@
+insert into car (id, modello, marca, km, url_image) values(nextval('car_seq'), 'Yaris', 'Toyota', 1000, 'ToyotaYaris.jpeg');
