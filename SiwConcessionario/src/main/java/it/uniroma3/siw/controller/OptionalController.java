@@ -40,7 +40,7 @@ public class OptionalController {
 	@Autowired CredentialsService credentialsService;
 	
 	
-	@GetMapping("/admin/formNewOptional")
+	@GetMapping(value = "/admin/formNewOptional")
 	public String AdminformNewOptional(Model model) {
 		Optional optional=new Optional();
 		model.addAttribute("optional",optional);
@@ -48,7 +48,7 @@ public class OptionalController {
 		return "admin/formNewOptional.html";
 	}
 	
-	@GetMapping("/supplier/formNewOptional")
+	@GetMapping(value = "/supplier/formNewOptional")
 	public String formNewOptional(Model model) {
 		Optional opt=new Optional();
 		model.addAttribute("optional",opt);
@@ -56,7 +56,7 @@ public class OptionalController {
 		return "supplier/formNewOptional.html";
 	}
 	
-	@PostMapping("/optional")
+	@PostMapping(value = "/optional")
 	public String newOptional(@Valid @ModelAttribute("optional")Optional opt,
             BindingResult ingredientBindingResult) {
 		this.optionalValidator.validate(opt,ingredientBindingResult);
@@ -76,13 +76,13 @@ public class OptionalController {
 		}
 	}
 	
-	@GetMapping("/optional")
+	@GetMapping(value = "/optional")
 	  public String showOptionals(Model model) {
 	     model.addAttribute("optionals", this.optionalService.findAll());
 	    return "optionals.html";
 	  }
 	
-	@GetMapping("admin/manageOptionals/{id}")
+	@GetMapping(value = "admin/manageOptionals/{id}")
 	public String AdminmanageOptionals(@PathVariable("id") Long id, Model model) {
 		Car car=this.carService.findById(id);
 		model.addAttribute("car",car);
@@ -90,7 +90,7 @@ public class OptionalController {
 		for(Optional opt : this.optionalService.findAll()) {
 			boolean presente=false;
 			for(OptionalCar optCar : car.getOptionals()) {
-				if(optCar.getOptional().equals(opt)) {
+				if(optCar.getOpt().equals(opt)) {
 					presente=true;
 				}
 			}
@@ -102,15 +102,15 @@ public class OptionalController {
 		return "admin/manageOptionals.html";
 	}
 	
-	@GetMapping("supplier/manageOptionals/{id}")
-	public String manageIngredients(@PathVariable("id") Long id, Model model) {
+	@GetMapping(value = "supplier/manageOptionals/{id}")
+	public String manageOptionals(@PathVariable("id") Long id, Model model) {
 		Car car=this.carService.findById(id);
 		model.addAttribute("car",car);
 		List<Optional> optionalNonPresenti= new ArrayList<Optional>();
 		for(Optional opt : this.optionalService.findAll()) {
 			boolean presente=false;
 			for(OptionalCar optCar : car.getOptionals()) {
-				if(optCar.getOptional().equals(opt)) {
+				if(optCar.getOpt().equals(opt)) {
 					presente=true;
 				}
 			}
@@ -123,13 +123,13 @@ public class OptionalController {
 	}
 	
 	
-	@GetMapping("admin/setOptionalToCar/{idCar}/{idOptional}")
+	@GetMapping(value = "admin/setOptionalToCar/{idCar}/{idOptional}")
 	public String AdminsetOptionalToCar(Model model,@PathVariable("idCar") Long idCar, @PathVariable("idOptional") Long idOpt) {
 		Optional opt= this.optionalService.findById(idOpt);
 		Car car= this.carService.findById(idCar);
 		
 		OptionalCar optCar=new OptionalCar();
-		optCar.setOptional(opt);
+		optCar.setOpt(opt);
 		optCar.setCar(car);
 		this.optCarService.save(optCar);
 		car.getOptionals().add(optCar);
@@ -138,13 +138,13 @@ public class OptionalController {
 		return "admin/formUpdateCar.html";
 	}
 	
-	@GetMapping("supplier/setOptionalToCar/{idCar}/{idOptional}")
+	@GetMapping(value = "supplier/setOptionalToCar/{idCar}/{idOptional}")
 	public String setOptionalToCar(Model model,@PathVariable("idCar") Long idCar, @PathVariable("idOptional") Long idOpt) {
 		Optional opt= this.optionalService.findById(idOpt);
 		Car car= this.carService.findById(idCar);
 		
 		OptionalCar optCar=new OptionalCar();
-		optCar.setOptional(opt);
+		optCar.setOpt(opt);
 		optCar.setCar(car);
 		this.optCarService.save(optCar);
 		car.getOptionals().add(optCar);

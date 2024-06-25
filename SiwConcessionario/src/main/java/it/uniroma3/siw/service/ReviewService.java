@@ -27,11 +27,11 @@ public class ReviewService{
 		return reviewRepository.findAll();
 	}
 
-	public void save(Review s) {
-		reviewRepository.save(s);
+	public void save(Review r) {
+		reviewRepository.save(r);
 	}
 	
-	public void remove(Review s) {
-		reviewRepository.delete(s);
+	public void remove(Review r) {
+		reviewRepository.delete(r);
 	}
 }

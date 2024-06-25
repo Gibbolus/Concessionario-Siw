@@ -78,7 +78,7 @@ public class AuthenticationController {
         return "supplier/index.html";
     }
 
-	@PostMapping(value = { "/register" })
+	@PostMapping(value = "/register" )
     public String registerUser(@Valid @ModelAttribute("user") User user,
                  BindingResult userBindingResult, @Valid
                  @ModelAttribute("credentials") Credentials credentials,
@@ -98,7 +98,7 @@ public class AuthenticationController {
             newSupplier.setSurname(user.getSurname());
             newSupplier.setBirth(user.getBirth());
             newSupplier.setUrlImage(user.getUrlImage());
-            user.setCook(newSupplier);
+            user.setSupplier(newSupplier);
             this.supplierService.save(newSupplier);
             userService.saveUser(user);
             

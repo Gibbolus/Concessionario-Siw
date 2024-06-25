@@ -30,24 +30,24 @@ public class SupplierController {
 	@Autowired
 	EntityManager entityManager;
 
-	@GetMapping("/supplier/{id}")
+	@GetMapping(value = "/supplier/{id}")
 	public String getSupplier(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("supplier", this.supplierService.findById(id));
 		return "supplier.html";
 	}
 
-	@GetMapping("/supplier")
+	@GetMapping(value = "/supplier")
 	public String showSuppliers(Model model) {
 		model.addAttribute("suppliers", this.supplierService.findAll());
 		return "suppliers.html";
 	}
 
-	@GetMapping("/formSearchSupplier")
+	@GetMapping(value = "/formSearchSupplier")
 	public String formSearchSupplier() {
 		return "formSearchSupplier.html";
 	}
 
-	@PostMapping("/formSearchSupplier")
+	@PostMapping(value = "/formSearchSupplier")
 	public String getSupplier(@RequestParam String surname, Model model) {
 		String query = "SELECT s FROM Supplier s WHERE LOWER(s.surname) LIKE LOWER('%" + surname + "%')";
 		List<Supplier> suppliers = this.entityManager.createQuery(query, Supplier.class).getResultList();
@@ -55,14 +55,14 @@ public class SupplierController {
 		return "suppliers.html";
 	}
 
-	@GetMapping("/admin/formNewSupplier")
+	@GetMapping(value = "/admin/formNewSupplier")
 	public String formNewSupplier(Model model) {
 		Supplier supplier = new Supplier();
 		model.addAttribute("supplier", supplier);
 		return "admin/formNewSupplier.html";
 	}
 
-	@PostMapping("/sup")
+	@PostMapping(value = "/sup")
 	public String newSupplier(@Valid @ModelAttribute("supplier") Supplier supplier,
 			BindingResult supplierBindingResult) {
 		this.supplierValidator.validate(supplier, supplierBindingResult);
@@ -75,13 +75,13 @@ public class SupplierController {
 		}
 	}
 
-	@GetMapping("/admin/manageSuppliers")
+	@GetMapping(value = "/admin/manageSuppliers")
 	public String manageSuppliers(Model model) {
 		model.addAttribute("suppliers", this.supplierService.findAll());
 		return "admin/manageSuppliers.html";
 	}
 
-	@GetMapping("/admin/removeSupplier/{id}")
+	@GetMapping(value = "/admin/removeSupplier/{id}")
 	public String removeSupplier(@PathVariable("id") Long id) {
 		Supplier s = this.supplierService.findById(id);
 		this.supplierService.remove(s);

@@ -13,9 +13,25 @@ import jakarta.persistence.OneToMany;
 public class Car {
 
 	@Id
-	@GeneratedValue( strategy= GenerationType.AUTO)
-	
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+
+	@OneToMany
+	public List<Review> reviews;
+
+	private String modello;
+
+	private String marca;
+
+	private Integer km;
+
+	private String urlImage;
+
+	@ManyToOne
+	public Supplier supplier;
+
+	@OneToMany(mappedBy = "car")
+	public List<OptionalCar> optionals;
 
 	public Long getId() {
 		return id;
@@ -24,45 +40,15 @@ public class Car {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	@OneToMany
-	public List<Review> recensioni;
 
-	private String modello;
-	
-	private String marca;
-	
-	private Integer km;
-	
-	private String urlImage;
-	
-	@ManyToOne
-	public Supplier supplier;
-	
-
-	
-	public Supplier getSupplier() {
-		return supplier;
+	public List<Review> getReviews() {
+		return reviews;
 	}
 
-	public void setSupplier(Supplier fornitore) {
-		this.supplier = fornitore;
+	public void setRecensioni(List<Review> reviews) {
+		this.reviews = reviews;
 	}
 
-
-	@OneToMany(mappedBy="car")
-	public List<OptionalCar> optionals;
-	
-	public List<OptionalCar> getOptionals() {
-		return optionals;
-	}
-
-	public void setOptionals(List<OptionalCar> optionals) {
-		this.optionals = optionals;
-	}
-
-	
-	
 	public String getModello() {
 		return modello;
 	}
@@ -94,4 +80,21 @@ public class Car {
 	public void setUrlImage(String urlImage) {
 		this.urlImage = urlImage;
 	}
+
+	public Supplier getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
+	}
+
+	public List<OptionalCar> getOptionals() {
+		return optionals;
+	}
+
+	public void setOptionals(List<OptionalCar> optionals) {
+		this.optionals = optionals;
+	}
+
 }

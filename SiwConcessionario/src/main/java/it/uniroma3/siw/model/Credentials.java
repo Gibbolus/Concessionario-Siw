@@ -10,21 +10,21 @@ import jakarta.persistence.OneToOne;
 
 @Entity
 public class Credentials {
-	
+
 	public static final String SUPPLIER_ROLE = "SUPPLIER";
 	public static final String ADMIN_ROLE = "ADMIN";
-	
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
 
 	private String username;
-	private String password;
-	private String role;
 	
-	@OneToOne(fetch=FetchType.EAGER, cascade={CascadeType.ALL})
+	private String password;
+	
+	private String role;
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
 	private User user;
 
 	public String getUsername() {

@@ -23,7 +23,7 @@ public class OptionalCarController {
 	@Autowired CarService carService;
 	
 	
-	@GetMapping("admin/removeOptional/{idCar}/{idOptional}")
+	@GetMapping(value = "admin/removeOptional/{idCar}/{idOptional}")
 	public String AdminremoveOptional(@PathVariable("idCar")Long idCar,@PathVariable("idOptional")Long idOpt, Model model) {
 		Car car=this.carService.findById(idCar);
 		OptionalCar optCar=this.optCarService.findById(idOpt);
@@ -34,7 +34,7 @@ public class OptionalCarController {
 		return "admin/formUpdateCar.html";
 	}
 	
-	@GetMapping("supplier/removeOptional/{idCar}/{idOptional}")
+	@GetMapping(value = "supplier/removeOptional/{idCar}/{idOptional}")
 	public String removeOptional(@PathVariable("idCar")Long idCar,@PathVariable("idOptional")Long idOpt, Model model) {
 		Car car=this.carService.findById(idCar);
 		OptionalCar optCar=this.optCarService.findById(idOpt);
