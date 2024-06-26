@@ -7,9 +7,7 @@
     font-family: 'Poppins',sans-serif;
 }
 
-body{
-	background-color: #dfdfdf
-}
+
 
 .nav-bar {
 	background-color: white;
@@ -18,7 +16,6 @@ body{
 	height: 75px;
 	display: flex;
   	align-items: center;
-  	margin-bottom: 2%;
   	padding-left: 10%;
 }
 
@@ -82,10 +79,6 @@ a:hover{
 	height: 50px;
 }
 
-.center{
-	display: flex;
-	justify-content: center;
-}
 
 .empty-text{
 	display: flex;
@@ -97,13 +90,39 @@ a:hover{
 .form-container{
 	display: flex;
 	justify-content: center;
-	margin: 5%;
+	background-image:linear-gradient(rgba(86, 89, 92, 0.5),rgba(86, 89, 92, 0.5)),
+	url(/images/addCar.jpg);
+	background-position: center;
+	background-size:cover;
+	height:90vh;
+
 }
+
 
 .form{
 	display: flex;
 	flex-direction: column;
 	gap: 2vh;
+	background-color: #dfdfdf;
+	width:30%;
+	margin-top:30px;
+	margin-bottom:30px;
+	border-radius:30px;
+	padding:20px 20px 20px 20px;
+}
+
+.form .center{
+	display: flex;
+	justify-content: center;
+}
+.error{
+	text-align: center;
+  
+}
+.form .error{
+	color:red;
+	font-size: 15px;
+	font-weight: 500;
 }
 
 .input-box .input-field{
