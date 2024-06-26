@@ -9,7 +9,7 @@
 	<body>
 		<div> <a href="/"> <img src="/images/logo-siw.png" width="50%"/> </a> </div>
 		<h1> Macchine</h1>
-		<div th:if="${cars.isEmpty()}">Non ci sono auto nel sistema</div>
+		<div th:if="${cars.isEmpty()}">Non hai aggiunto ancora un'auto</div>
 		<ul>
 			<li th:each="car : ${cars}">
 				<a th:text="${car.marca} + ' ' +${car.modello}">Up!</a>

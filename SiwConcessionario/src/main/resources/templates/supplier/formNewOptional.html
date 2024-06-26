@@ -38,10 +38,10 @@
 	</nav>
 
 
-	<h1 class="center">Aggiungi un optional</h1>
 
 	<div class="form-container">
-		<form class="form" th:action="@{/optional}" method="POST" th:object="${optional}">
+		<form class="form" id="optional" th:action="@{/optional}" method="POST" th:object="${optional}">
+			<h1 class="center">Aggiungi un optional</h1>
 			<div th:if="${#fields.hasGlobalErrors()}">
 				<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
 			</div>
