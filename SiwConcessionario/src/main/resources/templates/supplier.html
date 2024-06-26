@@ -23,8 +23,9 @@
 			</li>
 			<li class="nav-item">
 				<div class="account-reg-log">
-					<a id="reg-button" class="reg-log-button" href="/register"> Registrati </a>
-					<a class="reg-log-button" href="/login"> Login </a>
+					<a th:if="${userDetails}" id="reg-button" class="reg-log-button" href="/logout"> Logout </a>
+					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati </a>
+					<a th:unless="${userDetails}" class="reg-log-button" href="/login"> Login </a>
 				</div>
 			</li>
 		</ul>
@@ -37,12 +38,12 @@
 
 	<div th:if="${supplier}">
 		<div class="title">
-			<h2 th:text="${supplier.name} + ' ' + ${supplier.surname} "> Nome Cognome</h2>
+			<h2 th:text="${supplier.name} + ' ' + ${supplier.surname} "> Nome Cognome </h2>
 		</div>
 		<div class="img-text">
 			<div>
-				<img class="img" th:if="${supplier.urlImage.startsWith('https')}" th:src="${supplier.urlImage}">
-				<img class="img" th:unless="${supplier.urlImage.startsWith('https')}"
+				<img class="img" style="max-height: 30rem;" th:if="${supplier.urlImage.startsWith('https')}" th:src="${supplier.urlImage}">
+				<img class="img" style="max-height: 30rem;" th:unless="${supplier.urlImage.startsWith('https')}"
 					th:src="@{/images/__${supplier.urlImage}__}">
 			</div>
 			<div class="infos" id="text-sup">

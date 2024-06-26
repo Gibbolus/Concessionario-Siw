@@ -48,8 +48,8 @@ public class SupplierController {
 	}
 
 	@PostMapping(value = "/formSearchSupplier")
-	public String getSupplier(@RequestParam String surname, Model model) {
-		String query = "SELECT s FROM Supplier s WHERE LOWER(s.surname) LIKE LOWER('%" + surname + "%')";
+	public String getSupplier(@RequestParam String name, Model model) {
+		String query = "SELECT s FROM Supplier s WHERE LOWER(s.name) LIKE LOWER('%" + name + "%')";
 		List<Supplier> suppliers = this.entityManager.createQuery(query, Supplier.class).getResultList();
 		model.addAttribute("suppliers", suppliers);
 		return "suppliers.html";

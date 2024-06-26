@@ -88,7 +88,6 @@ public class CarController {
 	public String formNewCar(Model model) {
 		Car car = new Car();
 		model.addAttribute("car", car);
-
 		return "supplier/addCar.html";
 	}
 
@@ -105,7 +104,6 @@ public class CarController {
 		if (s != null) {
 			s.getCars().remove(car);
 		}
-
 		if (car.getOptionals().isEmpty()) {
 			this.carService.delete(car);
 			return "supplier/index.html";
@@ -117,7 +115,6 @@ public class CarController {
 			car.getOptionals().removeAll(car.getOptionals());
 
 		}
-
 		this.carService.delete(car);
 		return "supplier/index.html";
 	}

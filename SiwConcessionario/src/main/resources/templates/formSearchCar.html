@@ -1,18 +1,67 @@
 <!DOCTYPE html>
-<html>
- <head>
+<html lang="it">
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
 	<title>Cerca Macchina</title>
-	<link rel="stylesheet" href="/stile.css?version=3" />
- </head>
- <body>
-	 <div> <a href="/"> <img src="/images/logo-siw.png" width=50% /></a> </div>
-	 <h1>Immetti il modello della Macchina</h1>
-		<form th:action="@{/formSearchCar}" method="post">
-			<label for="name">Nome:</label>
-			<input type="text" id="modello" th:value="${modello}" name="modello"/>
-			<div>
-				<span><button type="submit">Conferma</button></span>
-			</div>
-		</form> 
-	 </body>	
+	<link rel="stylesheet" href="/css/search-style.css?version=1" />
+</head>
+
+<body>
+	<nav class="nav-bar">
+		<a href="/">
+			<img class="icons-home" src="/images/home.png"></img>
+		</a>
+		<h3 class="siw-text"> SiwConcessionario </h3>
+		<ul class="nav-menu">
+			<li class="nav-item">
+				<a class="ali" href="/car">Catalogo</a>
+			</li>
+			<li class="nav-item">
+				<a class="ali" href="/supplier">Fornitori</a>
+			</li>
+			<li class="nav-item">
+				<div class="account-reg-log">
+					<a th:if="${userDetails}" id="reg-button" class="reg-log-button" href="/logout"> Logout </a>
+					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati
+					</a>
+					<a th:unless="${userDetails}" class="reg-log-button" href="/login"> Login </a>
+				</div>
+			</li>
+		</ul>
+		<div class="hamburger">
+			<span class="bar"></span>
+			<span class="bar"></span>
+			<span class="bar"></span>
+		</div>
+	</nav>
+
+
+	<h1 class="center">Immetti il modello della Macchina</h1>
+
+
+	<div class="search-bar">
+		<div class="search-box">
+			<form th:action="@{/formSearchCar}" method="post">
+				<input id="search-input" type="text" th:value="${modello}" name="modello"
+					placeholder="Cerca una macchina..." />
+			</form>
+		</div>
+	</div>
+
+	<script>
+		const hamburger = document.querySelector(".hamburger");
+		const navMenu = document.querySelector(".nav-menu");
+		hamburger.addEventListener("click", () => {
+			hamburger.classList.toggle("active");
+			navMenu.classList.toggle("active");
+		})
+		document.querySelectorAll(".nav-link").forEach(n => n.addeaddEventListener("click", () => {
+			hamburger.classList.remove("active");
+			navMenu.classList.remove("active");
+		}))
+	</script>
+</body>
+
 </html>
