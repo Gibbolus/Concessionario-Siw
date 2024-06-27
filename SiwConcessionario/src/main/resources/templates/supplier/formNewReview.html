@@ -40,15 +40,20 @@
 
 
 	<div class="form-container">
-		<form class="form" id="optional" th:action="@{/optional}" method="POST" th:object="${optional}">
-			<h1 class="center" style="text-align: center;">Aggiungi un optional</h1>
+		<form class="form" id="optional" th:action="@{/review}" method="POST" th:object="${review}">
+			<h1 class="center">Aggiungi una Recensione</h1>
 			<div th:if="${#fields.hasGlobalErrors()}">
 				<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
 			</div>
 			<div class="input-box">
-				<input required type="text" class="input-field" th:field="${optional.name}" placeholder="Nome"/>
-				<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+				<input required type="text" class="input-field" th:field="${review.recensione}" placeholder="Recensisci"/>
+				<span th:if="${#fields.hasErrors('recensione')}" th:errors="*{recensione}">
 			</div>
+			<div class="input-box">
+				<input required type="number" class="input-field" th:field="${review.voto}" placeholder="Voto"/>
+				<span th:if="${#fields.hasErrors('voto')}" th:errors="*{voto}">
+			</div>
+			<input type="hidden" name="carId" th:value="${car.id}" />
 			<div class="input-submit">
 				<button class="submit-btn" id="submit"></button>
 				<label for="submit">Conferma</label>

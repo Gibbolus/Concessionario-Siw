@@ -43,7 +43,7 @@
 	<div class="form-container">
 		
 		<form class="form" th:action="@{/car}" method="POST" th:object="${car}">
-			<h1 class="center">Aggiungi una macchina</h1>
+			<h1 class="center" style="text-align: center;">Aggiungi una macchina</h1>
 			<div th:if="${#fields.hasGlobalErrors()}">
 				<p  class="error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
 			</div>

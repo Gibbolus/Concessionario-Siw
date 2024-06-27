@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.model.Car;
 import it.uniroma3.siw.model.Credentials;
@@ -44,35 +45,40 @@ public class ReviewController{
 		return "review.html";
 	}
 	
-	@GetMapping(value = "/review")
-	public String showAllReviews(Model model) {
-		model.addAttribute("review", this.reviewService.findAll());
+	@GetMapping(value = "/car/{carId}/review")
+	public String showAllReviews(@PathVariable("carId") Long carId, Model model) {
+		Car c = this.carService.findById(carId);
+		model.addAttribute("reviews", c.getReviews());
 		return "reviews.html";
 	}
 	
-	@GetMapping(value = "/supplier/formNewReview")
-	public String formNewReview(Model model) {
+	@GetMapping(value = "/supplier/formNewReview/{carId}")
+	public String formNewReview(@PathVariable("carId") Long carId, Model model) {
 		Review review = new Review();
+		Car c = carService.findById(carId);
+		model.addAttribute("car", c);
 		model.addAttribute("review", review);
 		return "supplier/formNewReview.html";
 	}
 	
-	@PostMapping(value = "/review/{carId}")
-	public String newReview(@Valid @ModelAttribute("review") Review review, @PathVariable("id") Long carId, BindingResult reviewBindingResult) {
+	@PostMapping(value = "/review")
+	public String newReview(@Valid @ModelAttribute("review") Review review, @RequestParam("carId") Long carId, BindingResult reviewBindingResult) {
 		UserDetails u = gc.getUser();
 		String username = u.getUsername();
 		Credentials credentials = this.credentialsService.getCredentials(username);
 		User currentUser = credentials.getUser();
 		Supplier supplier = currentUser.getSupplier();
 		Car reviewdCar = this.carService.findById(carId);
-
+		review.setCar(reviewdCar);
+		review.setSupplier(supplier);
+		
 		this.reviewValidator.validate(review, reviewBindingResult);
 		if(!reviewBindingResult.hasErrors()) {
 			supplier.getReviews().add(review);
 			reviewdCar.getReviews().add(review);
-			review.setCar(reviewdCar);
+			
 			this.reviewService.save(review);
-			return "redirect: review/" + review.getId();
+			return "redirect:review/" + review.getId();
 		}
 		else
 			return "supplier/formNewReview.html";

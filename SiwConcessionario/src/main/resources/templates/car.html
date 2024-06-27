@@ -74,6 +74,7 @@
 			<span th:unless="${car.supplier!=null}">Non disponibile</span>
 		</div>
 	</div>
+	<a th:if="${userDetails}" th:href="@{'/supplier/formNewReview/' + ${car.id}}"> Aggiungi una recensione </a>
 
 	<div th:unless="${car}">Non esiste</div>
 
