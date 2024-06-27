@@ -45,7 +45,7 @@ public class Car {
 		return reviews;
 	}
 
-	public void setRecensioni(List<Review> reviews) {
+	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
 	}
 

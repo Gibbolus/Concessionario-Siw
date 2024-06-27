@@ -143,13 +143,12 @@ a:hover{
 }
 
 .input-box .input-field{
-    width: 150%;
+	display: table;
+    width: 30vw;
     height: 60px;
     font-size: 17px;
     padding: 25px;
-    margin-bottom: 15px;
     border-radius: 30px;
-    margin: auto;
     border: none;
     background-color: #222;
     box-shadow: 0px 5px 10px 1px rgba(0,0,0, 0.05);
@@ -162,9 +161,15 @@ a:hover{
     color: white;
 }
 .input-field:focus{
-    width: 155%;
+    width: 32vw;
 }
 
+	#mobile-show{
+		display: none;
+	}
+
+@media(max-width: 1200px){
+}
 
 
 @media(max-width: 768px){
@@ -239,6 +244,20 @@ a:hover{
 		width: 130%;
 		background-color: #dfdfdf;
 	}
+	
+	#mobile-show{
+		display: flex;
+	}
+	
+	#main-show{
+		display: none;
+	}
+	
+	.input-box .input-field{
+		width: 50vw;
+	}
+	
+	
 }
 
 

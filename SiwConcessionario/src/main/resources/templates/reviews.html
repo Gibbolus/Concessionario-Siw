@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+<!DOCTYPE hmtl>
 <html lang="it">
 
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
-	<title> Catalogo Macchine</title>
-	<link rel="stylesheet" href="css/model-style.css?version=2" />
+	<title> Macchina</title>
+	<link rel="stylesheet" href="/css/review.css" />
 </head>
 
 <body>
@@ -13,19 +13,8 @@
 		<a href="/">
 			<img class="icons-home" src="/images/home.png"></img>
 		</a>
-		<div class="input-box" id="mobile-show">
-			<form th:action="@{/formSearchCar}" method="post">
-				<input class="input-field" type="text" th:value="${modello}" name="modello"
-					placeholder="Cerca una macchina..." />
-			</form>
-		</div>
 		<ul class="nav-menu">
-			<div class="input-box" id="main-show">
-				<form th:action="@{/formSearchCar}" method="post">
-					<input class="input-field" type="text" th:value="${modello}" name="modello"
-						placeholder="Cerca una macchina..." />
-				</form>
-			</div>
+			<h3 class="siw-text"> SiwConcessionario </h3>
 			<li class="nav-item">
 				<a class="ali" href="/car">Catalogo</a>
 			</li>
@@ -50,19 +39,42 @@
 
 
 
-
-	<h1 class="center"> Tutte le macchine</h1>
-	<div class="empty-text" th:if="${cars.isEmpty()}">Non ci sono macchine nel sistema</div>
-	<div class="container">
-		<div class="main-container" th:each="car : ${cars}">
-			<a th:href="@{'/car' + '/' + ${car.id}}">
-				<img class="img" th:if="${car.urlImage.startsWith('https')}" th:src="${car.urlImage}">
+	<div class="main-container">
+		<div class="title">
+			<h3 th:text="${car.marca}"> Nome Marca </h3>&nbsp; <!--&nbsp; serve per creare uno spazio-->
+			<h3 th:text="${car.modello}"> Nome Modello </h3>
+		</div>
+		<div class="review-container">
+			<div class="img-car">
+				<img class="img" th:if="${car.urlImage.startsWith('https')}"
+					th:src="${car.urlImage}">
 				<img class="img" th:unless="${car.urlImage.startsWith('https')}"
 					th:src="@{/images/__${car.urlImage}__}">
-			</a>
-			<h2 class="car-text" th:text="${car.marca} +' ' +${car.modello}"></h2>
+			</div>
 		</div>
+		<ul>
+			<li th:unless="${reviews.isEmpty()}" class="reviews" th:each="review : ${reviews}">
+				<div>
+					<div class="review-main" th:if="${review.recensione} != null">
+						<span class="username" th:text="${review.supplier.name} + ' - Voto: ' + ${review.voto} + '/10'"></span>
+						<br>
+						<span class="review-text" th:text="${review.recensione}"></span>
+					</div>
+				</div>
+			</li>
+		</ul>
 	</div>
+
+	<div class="empty-text" th:if="${reviews.isEmpty()}"> Questa macchina non ha ancora recensioni </div>
+
+
+
+
+
+
+
+
+
 
 
 

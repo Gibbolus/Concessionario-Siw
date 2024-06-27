@@ -13,8 +13,14 @@
 		<a href="/">
 			<img class="icons-home" src="/images/home.png"></img>
 		</a>
+		<div class="input-box" id="mobile-show">
+			<form th:action="@{/formSearchSupplier}" method="post">
+				<input class="input-field" type="text" th:value="${name}" name="name"
+					placeholder="Cerca un fornitore..." />
+			</form>
+		</div>
 		<ul class="nav-menu">
-			<div class="input-box">
+			<div class="input-box" id="main-show">
 				<form th:action="@{/formSearchSupplier}" method="post">
 					<input class="input-field" type="text" th:value="${name}" name="name"
 						placeholder="Cerca un fornitore..." />
@@ -29,7 +35,8 @@
 			<li class="nav-item">
 				<div class="account-reg-log">
 					<a th:if="${userDetails}" id="reg-button" class="reg-log-button" href="/logout"> Logout </a>
-					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati </a>
+					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati
+					</a>
 					<a th:unless="${userDetails}" class="reg-log-button" href="/login"> Login </a>
 				</div>
 			</li>
@@ -40,10 +47,10 @@
 			<span class="bar"></span>
 		</div>
 	</nav>
-	
+
 	<h1 class="center"> I nostri fornitori </h1>
 	<div class="empty-text" th:if="${suppliers.isEmpty()}">Non ci sono fornitori nel sistema</div>
-	
+
 	<div class="container">
 		<div class="main-container" id="sup" th:each="supplier : ${suppliers}">
 			<a id="link-text" th:href="@{'/supplier' + '/' + ${supplier.id}}">
@@ -51,8 +58,8 @@
 			</a>
 		</div>
 	</div>
-	
-	
+
+
 	<script>
 		const hamburger = document.querySelector(".hamburger");
 		const navMenu = document.querySelector(".nav-menu");

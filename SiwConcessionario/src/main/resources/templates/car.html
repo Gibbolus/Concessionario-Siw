@@ -57,7 +57,9 @@
 				</span>
 				<div id="fornitore"> Fornitore:
 					<span th:if="${car.supplier!=null}">
-						<span th:text="${car.supplier.name} +' '+ ${car.supplier.surname}">Nome Fornitore</span>
+						<a id="fornitore-text" th:href="@{'/supplier/' + ${car.supplier.id}}">
+							<span th:text="${car.supplier.name} +' '+ ${car.supplier.surname}">Nome Fornitore</span>
+						</a>
 					</span>
 					<span th:unless="${car.supplier!=null}">Non disponibile</span>
 				</div>
@@ -65,8 +67,10 @@
 					<a th:href="@{'/supplier/formNewReview/' + ${car.id}}"> Aggiungi una
 						recensione </a>
 				</div>
+				<div th:if="${userDetails}" id="review">
+					<a th:href="@{${car.id} + '/reviews'}"> Guarda tutte le recensioni </a>
+				</div>
 			</div>
-
 
 
 			<section class="optionals">
@@ -82,8 +86,8 @@
 						</div>
 					</ul>
 				</div>
+			</section>
 		</div>
-		</section>
 	</div>
 
 	<div th:unless="${car}">Non esiste</div>

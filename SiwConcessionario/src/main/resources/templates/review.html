@@ -25,7 +25,8 @@
 			<li class="nav-item">
 				<div class="account-reg-log">
 					<a th:if="${userDetails}" id="reg-button" class="reg-log-button" href="/logout"> Logout </a>
-					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati </a>
+					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati
+					</a>
 					<a th:unless="${userDetails}" class="reg-log-button" href="/login"> Login </a>
 				</div>
 			</li>
@@ -36,28 +37,31 @@
 			<span class="bar"></span>
 		</div>
 	</nav>
-	
+
 	<h1 class="center"> La tua recensione </h1>
-	
+
 	<div class="main-container" th:if="${review}">
 		<div class="review-container">
 			<div class="img-car">
-				<img class="img" th:if="${review.getCar().urlImage.startsWith('https')}" th:src="${review.getCar().urlImage}">
+				<img class="img" th:if="${review.getCar().urlImage.startsWith('https')}"
+					th:src="${review.getCar().urlImage}">
 				<img class="img" th:unless="${review.getCar().urlImage.startsWith('https')}"
 					th:src="@{/images/__${review.getCar().urlImage}__}">
 			</div>
-			
-			<!-- TESTO DELLA REVIEW E VOTO -->
-			
-			
-			
-			
+
+			<div>
+				<div class="review-main" th:if="${review.recensione} != null">
+					<span class="username" th:text="${userDetails.username} + ' - Voto: ' + ${review.voto} + '/10'"></span>
+					<br>
+					<span class="review-text" th:text="${review.recensione}"></span>
+				</div>
+			</div>
 		</div>
 	</div>
-	
+
 	<div class="empty-text" th:unless="${review}"> La tua recensione non è stata caricata </div>
-	
-	
+
+
 
 
 

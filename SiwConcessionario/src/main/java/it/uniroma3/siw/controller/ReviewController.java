@@ -45,10 +45,11 @@ public class ReviewController{
 		return "review.html";
 	}
 	
-	@GetMapping(value = "/car/{carId}/review")
+	@GetMapping(value = "/car/{carId}/reviews")
 	public String showAllReviews(@PathVariable("carId") Long carId, Model model) {
 		Car c = this.carService.findById(carId);
 		model.addAttribute("reviews", c.getReviews());
+		model.addAttribute("car", c);
 		return "reviews.html";
 	}
 	

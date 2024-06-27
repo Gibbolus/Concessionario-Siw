@@ -86,9 +86,8 @@ a:hover {
 }
 
 .title{
-	margin: 3% auto auto 12%;
 	display: flex;
-	justify-content: left;
+	justify-content: center;
 	font-size: x-large;
 	width: auto;
 }
@@ -99,6 +98,7 @@ a:hover {
 	flex-wrap: wrap;
 	justify-content: space-evenly;
 	gap: 10%;
+	margin: 0 4%;
 	align-items: center;
 }
 
@@ -150,6 +150,7 @@ a:hover {
 	display:flex;
 	flex-direction: column;
 	justify-content: center;
+	margin-bottom: 5%;
 }
 
 .optionals h2{
@@ -172,7 +173,9 @@ a:hover {
 	list-style: decimal;
 }
 
-
+#fornitore-text{
+	color: black;
+}
 
 
 @media(max-width: 768px){
