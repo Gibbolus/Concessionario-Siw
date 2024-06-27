@@ -4,14 +4,15 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
-    <title>Gestisci Auto</title>
-    <link rel="stylesheet" href="/css/manage-cars.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+	<title>Gestisci Auto</title>
+	<link rel="stylesheet" href="/css/manage-cars.css" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
 
 <body>
-	
+
 	<nav class="nav-bar">
 		<a href="/">
 			<img class="icons-home" src="/images/home.png"></img>
@@ -39,50 +40,49 @@
 			<span class="bar"></span>
 		</div>
 	</nav>
-	
-	
+
+
 	<section class="cars">
-			
-			<div class="noCars" th:if="${cars.isEmpty()}">
-						<span class="material-symbols-outlined">Error</span>
-						<p>Spiacenti nessuna Auto trovata</p> 
+		<div class="noCars" th:if="${cars.isEmpty()}">
+			<span class="material-symbols-outlined">Error</span>
+			<p>Spiacenti nessuna Auto trovata</p>
+		</div>
+		<div class="addCar">
+			<a style="display: flex; align-items: center;" href="/supplier/addCar"> Aggiungi una Macchina
+				<span class="material-symbols-outlined">add_circle</span>
+			</a>
+		</div>
+		<ul class="container">
+			<li class="boxCar" th:each="car : ${cars}">
+				<img th:if="${car.urlImage.startsWith('https')}" th:src="${car.urlImage}" alt="Immagine Auto">
+				<img th:unless="${car.urlImage.startsWith('https')}" th:src="@{/images/__${car.urlImage}__} "
+					alt="Immagine Auto">
+				<a th:href="@{'/car' + '/' + ${car.id}}" th:text="${car.modello} +' ' +${car.marca}">Modello Marca</a>
+				<div class="options">
+					<a class="update" title="modifica" th:href="@{'/supplier/formUpdateCar/' + ${car.id} }">
+						<span class="material-symbols-outlined">edit_note</span>
+					</a>
+					<a class="remove" title="elimina" th:href="@{'/supplier/removeCar/' + ${car.id} }">
+						<i class="fa fa-trash"></i>
+					</a>
 				</div>
-				<div class="addCar">
-					<a href="/supplier/addCar">
-						<span class="material-symbols-outlined">add_circle</span>Aggiungi una Macchina</a>
-				</div>
-				
-				<ul class="container">
-					<li class="boxCar" th:each="car : ${cars}">
-						<img id="carImage" th:src="${car.urlImage}" alt="Immagine Auto">
-						<a th:href="@{'/car' + '/' + ${car.id}}"
-						th:text="${car.modello} +' ' +${car.marca}">Modello Marca</a>
-						<div class="options">
-							<a class="update" title="modifica" th:href="@{'/supplier/formUpdateCar/' + ${car.id} }">
-								<span class="material-symbols-outlined">edit_note</span></a>	
-							<a class="remove" title="elimina" th:href="@{'/supplier/removeCar/' + ${car.id} }"><i class="fa fa-trash"></i></a>
-						</div>
-						
-						
-					</li>
-				
-				</ul>
-		</section>
-		
-		
-	
+			</li>
+		</ul>
+	</section>
+
+
+	<script>
+		const hamburger = document.querySelector(".hamburger");
+		const navMenu = document.querySelector(".nav-menu");
+		hamburger.addEventListener("click", () => {
+			hamburger.classList.toggle("active");
+			navMenu.classList.toggle("active");
+		})
+		document.querySelectorAll(".nav-link").forEach(n => n.addeaddEventListener("click", () => {
+			hamburger.classList.remove("active");
+			navMenu.classList.remove("active");
+		}))
+	</script>
 </body>
 
 </html>
-	
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	

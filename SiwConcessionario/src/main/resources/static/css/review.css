@@ -143,12 +143,20 @@ a:hover {
 	width: auto;
 }
 
-.reviews{
-	margin-top: 2%;
+.container{
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: space-evenly;
+	margin: 2% 3%;
+}
+
+
+.reviews{
+	min-width: auto;
+	box-sizing: border-box;
+	width: 40vw;
+	margin-top: 2%;
 	background-color: white;
 	border-radius: 50px;
 	padding: 10px;

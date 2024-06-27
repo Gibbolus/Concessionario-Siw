@@ -41,8 +41,7 @@
 
 	<div class="main-container">
 		<div class="title">
-			<h3 th:text="${car.marca}"> Nome Marca </h3>&nbsp; <!--&nbsp; serve per creare uno spazio-->
-			<h3 th:text="${car.modello}"> Nome Modello </h3>
+			<h3 th:text="${car.marca} + ' ' + ${car.modello}"> Nome Modello </h3>
 		</div>
 		<div class="review-container">
 			<div class="img-car">
@@ -52,16 +51,16 @@
 					th:src="@{/images/__${car.urlImage}__}">
 			</div>
 		</div>
-		<ul>
-			<li th:unless="${reviews.isEmpty()}" class="reviews" th:each="review : ${reviews}">
-				<div>
+		<ul class="container">
+			<div th:unless="${reviews.isEmpty()}" th:each="review : ${reviews}">
+				<div class="reviews">
 					<div class="review-main" th:if="${review.recensione} != null">
 						<span class="username" th:text="${review.supplier.name} + ' - Voto: ' + ${review.voto} + '/10'"></span>
 						<br>
 						<span class="review-text" th:text="${review.recensione}"></span>
 					</div>
 				</div>
-			</li>
+			</div>
 		</ul>
 	</div>
 

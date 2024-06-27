@@ -106,7 +106,7 @@ public class CarController {
 		}
 		if (car.getOptionals().isEmpty()) {
 			this.carService.delete(car);
-			return "supplier/index.html";
+			return "redirect:/supplier/manageCars";
 		} else {
 			for (OptionalCar optCar : car.getOptionals()) {
 				optCar.setCar(null);
@@ -116,7 +116,7 @@ public class CarController {
 
 		}
 		this.carService.delete(car);
-		return "supplier/index.html";
+		return "redirect:/supplier/manageCars";
 	}
 
 	@PostMapping(value = "/car")

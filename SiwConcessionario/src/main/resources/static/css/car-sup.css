@@ -102,7 +102,6 @@ a:hover {
 	align-items: center;
 }
 
-
 .img{
 	margin-top: 4%;
 	height: auto;
@@ -131,8 +130,8 @@ a:hover {
 	box-shadow:10px 10px 20px rgba(0, 0, 0, 0.3),
 	-10px -10px 20px rgba(0, 0, 0, 0.3);
 	transition:1s;
-	
 }
+
 #review a{
 	text-decoration: none;
 	
