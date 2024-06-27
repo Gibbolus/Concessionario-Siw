@@ -25,7 +25,8 @@
 			<li class="nav-item">
 				<div class="account-reg-log">
 					<a th:if="${userDetails}" id="reg-button" class="reg-log-button" href="/logout"> Logout </a>
-					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati </a>
+					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati
+					</a>
 					<a th:unless="${userDetails}" class="reg-log-button" href="/login"> Login </a>
 				</div>
 			</li>
@@ -54,27 +55,36 @@
 				<span> Km percorsi:
 					<span th:text="${car.km}"> num di km </span>
 				</span>
-				<div  class="optional" th:if="${car.optionals.isEmpty()}">Lista degli optional non disponibile</div>
-				<div class="optional" th:unless="${car.optionals.isEmpty()}">
-					<span> Lista degli optional: </span>
-					<ul>
-						<div>
-							<li  th:each="optional : ${car.optionals}">
-								<span th:text="${optional.name}"></span>
-							</li>
-						</div>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div id="fornitore"> Fornitore:
+				<div id="fornitore"> Fornitore:
 			<span th:if="${car.supplier!=null}">
 				<span th:text="${car.supplier.name} +' '+ ${car.supplier.surname}">Nome Fornitore</span>
 			</span>
 			<span th:unless="${car.supplier!=null}">Non disponibile</span>
 		</div>
+		<div id="review">
+			<a th:if="${userDetails}" th:href="@{'/supplier/formNewReview/' + ${car.id}}"> Aggiungi una recensione </a>
+		</div>
+				
+		</div>
+		
+		
+		
+		<section class="optionals">
+			<h2>Lista optional:</h2>
+		
+		<div class="optional" th:if="${car.optionals.isEmpty()}">Lista degli optional non disponibile</div>
+				<div class="optional" th:unless="${car.optionals.isEmpty()}">
+					<ul>
+						<div>
+							<li th:each="optional : ${car.optionals}">
+								<span th:text="${optional.opt.name}"></span>
+							</li>
+						</div>
+					</ul>
+				</div>
+			</div>
+		</section>
 	</div>
-	<a th:if="${userDetails}" th:href="@{'/supplier/formNewReview/' + ${car.id}}"> Aggiungi una recensione </a>
 
 	<div th:unless="${car}">Non esiste</div>
 
