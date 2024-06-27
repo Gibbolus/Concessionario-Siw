@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
 	<title> Macchina</title>
-	<link rel="stylesheet" href="/css/car-sup.css" />
+	<link rel="stylesheet" href="/css/review.css" />
 </head>
 
 <body>
@@ -14,8 +14,8 @@
 		<a href="/">
 			<img class="icons-home" src="/images/home.png"></img>
 		</a>
-		<h3 class="siw-text"> SiwConcessionario </h3>
 		<ul class="nav-menu">
+			<h3 class="siw-text"> SiwConcessionario </h3>
 			<li class="nav-item">
 				<a class="ali" href="/car">Catalogo</a>
 			</li>
@@ -36,6 +36,28 @@
 			<span class="bar"></span>
 		</div>
 	</nav>
+	
+	<h1 class="center"> La tua recensione </h1>
+	
+	<div class="main-container" th:if="${review}">
+		<div class="review-container">
+			<div class="img-car">
+				<img class="img" th:if="${review.getCar().urlImage.startsWith('https')}" th:src="${review.getCar().urlImage}">
+				<img class="img" th:unless="${review.getCar().urlImage.startsWith('https')}"
+					th:src="@{/images/__${review.getCar().urlImage}__}">
+			</div>
+			
+			<!-- TESTO DELLA REVIEW E VOTO -->
+			
+			
+			
+			
+		</div>
+	</div>
+	
+	<div class="empty-text" th:unless="${review}"> La tua recensione non è stata caricata </div>
+	
+	
 
 
 

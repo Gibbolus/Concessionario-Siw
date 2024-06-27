@@ -13,15 +13,13 @@
 		<a href="/">
 			<img class="icons-home" src="/images/home.png"></img>
 		</a>
-		<div class="search-bar">
-			<div class="search-box">
+		<ul class="nav-menu">
+			<div class="input-box">
 				<form th:action="@{/formSearchSupplier}" method="post">
-					<input id="search-input" type="text" th:value="${name}" name="name"
+					<input class="input-field" type="text" th:value="${name}" name="name"
 						placeholder="Cerca un fornitore..." />
 				</form>
 			</div>
-		</div>
-		<ul class="nav-menu">
 			<li class="nav-item">
 				<a class="ali" href="/car">Catalogo</a>
 			</li>

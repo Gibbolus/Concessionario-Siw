@@ -56,23 +56,23 @@
 					<span th:text="${car.km}"> num di km </span>
 				</span>
 				<div id="fornitore"> Fornitore:
-			<span th:if="${car.supplier!=null}">
-				<span th:text="${car.supplier.name} +' '+ ${car.supplier.surname}">Nome Fornitore</span>
-			</span>
-			<span th:unless="${car.supplier!=null}">Non disponibile</span>
-		</div>
-		<div id="review">
-			<a th:if="${userDetails}" th:href="@{'/supplier/formNewReview/' + ${car.id}}"> Aggiungi una recensione </a>
-		</div>
-				
-		</div>
-		
-		
-		
-		<section class="optionals">
-			<h2>Lista optional:</h2>
-		
-		<div class="optional" th:if="${car.optionals.isEmpty()}">Lista degli optional non disponibile</div>
+					<span th:if="${car.supplier!=null}">
+						<span th:text="${car.supplier.name} +' '+ ${car.supplier.surname}">Nome Fornitore</span>
+					</span>
+					<span th:unless="${car.supplier!=null}">Non disponibile</span>
+				</div>
+				<div th:if="${userDetails}" id="review">
+					<a th:href="@{'/supplier/formNewReview/' + ${car.id}}"> Aggiungi una
+						recensione </a>
+				</div>
+			</div>
+
+
+
+			<section class="optionals">
+				<h2>Lista optional:</h2>
+
+				<div class="optional" th:if="${car.optionals.isEmpty()}">Lista degli optional non disponibile</div>
 				<div class="optional" th:unless="${car.optionals.isEmpty()}">
 					<ul>
 						<div>
@@ -82,7 +82,7 @@
 						</div>
 					</ul>
 				</div>
-			</div>
+		</div>
 		</section>
 	</div>
 
