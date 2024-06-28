@@ -51,7 +51,7 @@
 
 			<div>
 				<div class="review-main" th:if="${review.recensione} != null">
-					<span class="username" th:text="${review.getCar().getSupplier().getName()} + ' - Voto: ' + ${review.voto} + '/10'"></span>
+					<span class="username" th:text="${review.getSupplier().getName()} + ' - Voto: ' + ${review.voto} + '/10'"></span>
 					<br>
 					<span class="review-text" th:text="${review.recensione}"></span>
 				</div>

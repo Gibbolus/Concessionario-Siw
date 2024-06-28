@@ -22,14 +22,18 @@ public class ReviewValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		Review r=(Review) target;
 		if(r.getVoto()<0 || r.getVoto()>10) {
-			errors.reject("voto.error");
+			errors.reject("error.voto");
 		}
 		if(r.supplier.equals(r.car.supplier)) {
-			errors.reject("recensione.error");
+			errors.reject("error.recensione");
 		}
-		if(this.reviewService.existsBySupplierAndCar(r.supplier, r.car)) {
-			errors.reject("recensione.duplicate");
+		for(Review review: r.car.getReviews()) { //sfoglia tutte le recensioni
+			if(review.getSupplier().equals(r.getSupplier())) { //se tra le recensioni ne trovi una con lo stesso fornitore
+				errors.reject("recensione.duplicate");  //il fornitore ha già rilasciato una recensione per quell'auto
+			}
 		}
+		
+		
 	}
 	
 	

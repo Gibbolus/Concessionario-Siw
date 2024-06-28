@@ -77,29 +77,45 @@ public class ReviewController{
 		if(!reviewBindingResult.hasErrors()) {
 			supplier.getReviews().add(review);
 			reviewdCar.getReviews().add(review);
-			
 			this.reviewService.save(review);
 			return "redirect:review/" + review.getId();
 		}
 		else
-			return "supplier/formNewReview.html";
+			return "redirect:/supplier/formNewReview/" + reviewdCar.getId();
+	}
+	
+	@GetMapping(value="/manageReviews")
+	public String manageReviews(Model model) {
+		UserDetails u = gc.getUser();
+		String username = u.getUsername();
+		Credentials credentials = this.credentialsService.getCredentials(username);
+		User currentUser = credentials.getUser();
+		
+		if(credentials.getRole().equals("ADMIN")) { //se si tratta di un admin passa tutte le review presenti sul sistema
+			model.addAttribute("reviews", this.reviewService.findAll());
+			return "manageReviews.html";
+		}
+		else { //si tratta di un fornitore
+			Supplier supplier = currentUser.getSupplier();
+			model.addAttribute("reviews",supplier.getReviews()); //passa solo le review del fornitore corrente
+		
+			return "manageReviews.html";
+		}
 	}
 	
 	
-	@GetMapping(value = "/admin/removeReview/{id}")
+	@GetMapping(value = "/removeReview/{id}")
 	public String removeReview(@PathVariable("id") Long id) {
 		Review review = this.reviewService.findById(id);
 		review.getSupplier().getReviews().remove(review);
 		review.setSupplier(null);
 		Car reviewdCar = review.getCar();
 		List<Review> carReviews = reviewdCar.getReviews();
-		for(Review r : carReviews) {
-			if(r.equals(review)) {
-				reviewdCar.getReviews().remove(r);
-			}
-		}
+		
+		carReviews.remove(review);
+		
 		this.reviewService.remove(review);
-		return "admin/car" + reviewdCar.getId();
+		return "redirect:/car/"+ reviewdCar.getId();
 	}
 	
 	
