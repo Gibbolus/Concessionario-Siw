@@ -25,7 +25,8 @@
 			<li class="nav-item">
 				<div class="account-reg-log">
 					<a th:if="${userDetails}" id="reg-button" class="reg-log-button" href="/logout"> Logout </a>
-					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati </a>
+					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati
+					</a>
 					<a th:unless="${userDetails}" class="reg-log-button" href="/login"> Login </a>
 				</div>
 			</li>
@@ -37,8 +38,9 @@
 		</div>
 	</nav>
 
-	<form class="center" th:action="@{/login}" , method="POST">
-		<div class="login-box">
+	<div class="login-box">
+		<form class="form" th:action="@{/login}" , method="POST">
+
 			<div class="login-header">
 				<header>Login</header>
 			</div>
@@ -54,24 +56,24 @@
 				<button class="submit-btn" id="submit"></button>
 				<label for="submit">Entra</label>
 			</div>
-		</div>
-	</form>
-	<div class="sign-up-link">
-		<p>Non hai un account? <a href="/register">Registrati</a></p>
-	</div>
-	
-	<script>
-		const hamburger = document.querySelector(".hamburger");
-		const navMenu = document.querySelector(".nav-menu");
-		hamburger.addEventListener("click", () => {
-			hamburger.classList.toggle("active");
-			navMenu.classList.toggle("active");
-		})
-		document.querySelectorAll(".nav-link").forEach(n => n.addeaddEventListener("click", () => {
-			hamburger.classList.remove("active");
-			navMenu.classList.remove("active");
-		}))
-	</script>
+			<div class="sign-up-link">
+				<p>Non hai un account? <a href="/register">Registrati</a></p>
+
+			</div>
+		</form>
+
+		<script>
+			const hamburger = document.querySelector(".hamburger");
+			const navMenu = document.querySelector(".nav-menu");
+			hamburger.addEventListener("click", () => {
+				hamburger.classList.toggle("active");
+				navMenu.classList.toggle("active");
+			})
+			document.querySelectorAll(".nav-link").forEach(n => n.addeaddEventListener("click", () => {
+				hamburger.classList.remove("active");
+				navMenu.classList.remove("active");
+			}))
+		</script>
 </body>
 
 </html>

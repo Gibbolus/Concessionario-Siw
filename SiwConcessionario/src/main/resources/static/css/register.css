@@ -18,7 +18,6 @@ body {
 	height: 75px;
 	display: flex;
 	align-items: center;
-	margin-bottom: 2%;
 	padding-left: 10%;
 }
 
@@ -85,20 +84,32 @@ body {
 .register-box {
 	display: flex;
 	justify-content: center;
+	background-image:linear-gradient(rgba(86, 89, 92, 0.5),rgba(86, 89, 92, 0.5)),
+	url(/images/background-register.jpg);
+	background-position: center;
+	background-size:cover;
+	height:95%;
+	align-items: center;
+
+}
+.form{
+	display: flex;
 	flex-direction: column;
-	width: 440px;
-	height: 480px;
-	padding: 30px;
+	margin-top:2%;
+	background-color: #dfdfdf;
+	width:30%;
+	height:70%;
+	border-radius:30px;
+	padding:20px 20px 20px 20px;
 }
 
 .register-header {
 	text-align: center;
-	margin: 5% 0 2% 0;
+    margin: 10px 0 10px 0;
 }
 
 .register-error {
 	text-align: center;
-	margin:10px 0;
 }
 
 .register-error .error {
@@ -106,7 +117,7 @@ body {
 	font-size: 17px;
 }
 
-.register-header header {
+.register-header h1 {
 	color: #333;
 	font-size: 30px;
 	font-weight: 600;

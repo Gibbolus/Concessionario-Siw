@@ -71,8 +71,8 @@ public class CarController {
 	}
 
 	@PostMapping(value = "/formSearchCar")
-	public String getCarByModello(@RequestParam String modello, Model model) {
-		String query = "SELECT c FROM Car c WHERE LOWER(c.modello) LIKE LOWER('%" + modello + "%')";
+	public String getCarByModello(@RequestParam String marca, Model model) {
+		String query = "SELECT c FROM Car c WHERE LOWER(c.marca) LIKE LOWER('%" + marca + "%')";
 		List<Car> cars = this.entityManager.createQuery(query, Car.class).getResultList();
 		model.addAttribute("cars", cars);
 		return "cars.html";
