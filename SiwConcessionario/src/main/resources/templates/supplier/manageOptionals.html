@@ -1,29 +1,91 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title> Modifica lista degli optional</title>
-		<link rel="stylesheet" href="/stile.css?version=2" />
-	</head>
-	
-	<body>
-		<div><a href="/"><img src="/images/logo-siw.png" width="50%" /></a></div>
-		<h1> Aggiungi ingrediente:</h1>
-		<div th:if="${car.optionals.isEmpty()}">La macchina non ha ancora optionals </div>
-		<div th:unless="${car.optionals.isEmpty()}">
-			<li th:each="optionalCar : ${car.optionals}">
-				<a th:text="${optionalCar.opt.name}">Up!</a>
-				<a th:href="@{'/supplier/removeOptional/' + ${car.id} +'/' +${optionalCar.id}}">(Rimuovi)</a>
+<html lang="it">
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<title> Modifica lista degli optional</title>
+	<link rel="stylesheet" href="/css/manage-optionals.css?version=2" />
+</head>
+
+<body>
+	<nav class="nav-bar">
+		<a href="/">
+			<img class="icons-home" src="/images/home.png"></img>
+		</a>
+		<h3 class="siw-text"> SiwConcessionario </h3>
+		<ul class="nav-menu">
+			<li class="nav-item">
+				<a class="ali" href="/car">Catalogo</a>
 			</li>
-		</div>
-		<ul>
-			<div th:if="${optionals.isEmpty()}">Non ci sono optionals disponibili </div>
-			<div th:unless="${optionals.isEmpty()}">
-				<li th:each="optional : ${optionals}">
-					<a th:text="${optional.name}">Up!</a>
-					<a th:href="@{'/supplier/setOptionalToCar/' + ${car.id} +'/' +${optional.id}}">Aggiungi optional alla macchina </a>
+			<li class="nav-item">
+				<a class="ali" href="/supplier">Fornitori</a>
+			</li>
+			<li class="nav-item">
+				<div class="account-reg-log">
+					<a th:if="${userDetails}" id="reg-button" class="reg-log-button" href="/logout"> Logout </a>
+					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati
+					</a>
+					<a th:unless="${userDetails}" class="reg-log-button" href="/login"> Login </a>
 				</div>
-				</li>
 			</li>
 		</ul>
-	</body>
+		<div class="hamburger">
+			<span class="bar"></span>
+			<span class="bar"></span>
+			<span class="bar"></span>
+		</div>
+	</nav>
+
+	<h1 class="center"> Aggiungi un ptional</h1>
+
+	<div th:if="${car}">
+		<br>
+		<div class="title">
+			<h3 th:text="${car.marca} + ' ' + ${car.modello}"> Nome Modello </h3>
+		</div>
+		<div class="img-text">
+			<div>
+				<img class="img" th:if="${car.urlImage.startsWith('https')}" th:src="${car.urlImage}">
+				<img class="img" th:unless="${car.urlImage.startsWith('https')}"
+					th:src="@{/images/__${car.urlImage}__}">
+			</div>
+			<div class="modifica-container">
+
+				<section class="optionals">
+					<h2>Lista optional:</h2>
+
+					<div class="optionals" th:unless="${car.optionals.isEmpty()}">
+						<li th:each="optionalCar : ${car.optionals}">
+							<span th:text="${optionalCar.opt.name}"> </span>
+							<a class="link" id="remove" th:href="@{'/supplier/removeOptional/' + ${car.id} +'/' +${optionalCar.id}}">Rimuovi</a>
+						</li>
+					</div>
+					<ul>
+						<div style="font-size: larger;" th:if="${optionals.isEmpty()}">Non ci sono altri optionals disponibili </div>
+						<div th:unless="${optionals.isEmpty()}">
+							<li th:each="optional : ${optionals}">
+								<a th:text="${optional.name}">Up!</a>
+								<a class="link" id="add" th:href="@{'/supplier/setOptionalToCar/' + ${car.id} +'/' +${optional.id}}">Aggiungi </a>
+							</li>
+						</div>
+					</ul>
+				</section>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
 </html>

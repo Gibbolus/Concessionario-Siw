@@ -126,7 +126,8 @@ a:hover {
 }
 
 .username{
-	text-align: center;
+	margin-left: 5%;
+	text-align: left;
 	font-size: x-large;
 	font-weight: 700;
 }

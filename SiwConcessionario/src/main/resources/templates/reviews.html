@@ -55,7 +55,8 @@
 			<div th:unless="${reviews.isEmpty()}" th:each="review : ${reviews}">
 				<div class="reviews">
 					<div class="review-main" th:if="${review.recensione} != null">
-						<span class="username" th:text="${review.supplier.name} + ' - Voto: ' + ${review.voto} + '/10'"></span>
+						<span class="username" th:text="${review.getSupplier().getName()}"></span>
+						<span class="username" th:text="${review.voto} + '/10'"></span>
 						<br>
 						<span class="review-text" th:text="${review.recensione}"></span>
 					</div>

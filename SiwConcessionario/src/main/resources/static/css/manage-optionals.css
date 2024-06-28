@@ -1,14 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
 
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	font-family: 'Poppins', sans-serif;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif;
 }
 
 body{
-	background-color: #dfdfdf;
+	background-color: #dfdfdf
 }
 
 .nav-bar {
@@ -18,17 +18,17 @@ body{
 	height: 75px;
 	display: flex;
 	align-items: center;
-	padding-left: 10%;
 	margin-bottom: 2%;
+	padding-left: 10%;
 }
 
-.siw-text {
+.siw-text{
 	font-weight: 500;
 	font-size: x-large;
 	display: none;
 }
 
-.nav-menu {
+.nav-menu{
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
@@ -45,18 +45,18 @@ body{
 	font-size: larger;
 }
 
-.account-reg-log {
+.account-reg-log{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	align-content: center;
 }
 
-#reg-button {
+#reg-button{
 	margin-bottom: 0.5rem;
 }
 
-.reg-log-button {
+.reg-log-button{
 	text-decoration: none;
 	color: #222;
 	display: flex;
@@ -68,12 +68,8 @@ body{
 	box-shadow: 0 0 2px 1px black;
 }
 
-.hamburger {
+.hamburger{
 	display: none;
-}
-
-a:hover {
-	text-decoration: underline;
 }
 
 .icons-home {
@@ -85,25 +81,15 @@ a:hover {
 	justify-content: center;
 }
 
+a:hover{
+    text-decoration: underline;
+}
+
 .title{
 	display: flex;
 	justify-content: center;
 	font-size: x-large;
 	width: auto;
-}
-
-.empty-text{
-	display: flex;
-	justify-content: center;
-	font-size: larger;
-	margin-top: 4%;
-}
-
-.img{
-	margin-top: 2%;
-	width: 40vw;
-	border-radius: 50px;
-	box-shadow: black 1px 1px 5px;
 }
 
 .img-text{
@@ -116,86 +102,74 @@ a:hover {
 	align-items: center;
 }
 
-.modifica-container{
-	display: flex;
+.img{
+	margin-top: 4%;
+	height: auto;
+	width: 40vw;
+	border-radius: 50px;
+	box-shadow: black 1px 1px 5px;
+}
+
+.optionals{
+	width:40vh;
+	height:auto;
+	margin-top:5%;
+	display:flex;
 	flex-direction: column;
 	justify-content: center;
+	margin-bottom: 5%;
+}
+
+.optionals h2{
 	text-align: center;
+	font-size: xx-large;
+	font-weight:700;
 }
 
-.modifica-container h2{
-	margin-bottom: 15%;
-} 
-
-
-.modifica-container a{
-	font-size: x-large;
-	text-decoration: none;
-	color: black;
-	cursor: pointer;
-} 
-
-.update{
-	display:inline-block;
-	border: 2px solid black;
-	padding:5px 5px;
-	border-radius:20px;
-	margin-top:15px;
-	text-decoration: none;
-	box-shadow:10px 10px 20px rgba(0, 0, 0, 0.3),
-	-10px -10px 20px rgba(0, 0, 0, 0.3);
-	transition:1s;
+.optionals li{
+	display: flex;
+	font-size: larger;
+	justify-content: flex-start;
 }
 
-.update a{
+.link{
+	font-weight: 700;
 	text-decoration: none;
-	
+	margin-left: auto;
+	display: flex;
+	justify-content: flex-end;
 }
 
 #remove:hover{
-	width:105%;
-	background-color:red;
+	color: red;	
+	text-decoration: none;
 }
 
 #add:hover{
-	width:105%;
-	background-color: limegreen;;
+	color: limegreen;	
+	text-decoration: none;
 }
 
 
 
-
-
-
-
-
-
-
-
-
-
-@media(max-width: 768px) {
-
-	.icons-home {
-		margin: 0;
-	}
-
-	.nav-bar {
+@media(max-width: 768px){
+	
+	.nav-bar{
 		min-height: 70px;
 		justify-content: space-between;
 		padding: 0 24px;
 	}
-
-	.ali {
+	
+	.ali{
 		transition: 0.7s ease;
 	}
-
-	.hamburger {
+	
+	.hamburger{
 		display: block;
 		cursor: pointer;
 	}
-
-	.bar {
+	
+	.bar{
 		display: block;
 		width: 25px;
 		height: 3px;
@@ -204,20 +178,18 @@ a:hover {
 		transition: all 0.3s ease-in-out;
 		background-color: black;
 	}
-
-	.hamburger.active .bar:nth-child(2) {
+	
+	.hamburger.active .bar:nth-child(2){
 		opacity: 0;
 	}
-
-	.hamburger.active .bar:nth-child(1) {
+	.hamburger.active .bar:nth-child(1){
 		transform: translateY(8px) rotate(45deg);
 	}
-
-	.hamburger.active .bar:nth-child(3) {
+	.hamburger.active .bar:nth-child(3){
 		transform: translateY(-8px) rotate(-45deg);
 	}
-
-	.nav-menu {
+	
+	.nav-menu{
 		position: fixed;
 		padding: 0 50px 20px 0;
 		right: -36%;
@@ -229,20 +201,21 @@ a:hover {
 		transition: 0.3s;
 		border-radius: 50px;
 	}
-
-	.siw-text {
+	
+	
+	.siw-text{
 		display: flex;
 	}
-
-	.nav-item {
+	
+	.nav-item{
 		margin: 20px auto;
 	}
-
-	.nav-menu.active {
+	
+	.nav-menu.active{
 		right: -9%;
 	}
-
-	.reg-log-button {
+	
+	.reg-log-button{
 		height: 140%;
 		margin: 5px;
 		width: 130%;
@@ -251,9 +224,9 @@ a:hover {
 }
 
 
-@media(max-width: 600px) {
+@media(max-width: 600px){
 
-	.nav-menu {
+	.nav-menu{
 		width: 45%;
 		right: -46%;
 	}

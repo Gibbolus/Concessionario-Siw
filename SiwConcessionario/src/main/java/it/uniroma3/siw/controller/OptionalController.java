@@ -118,7 +118,7 @@ public class OptionalController {
 				optionalNonPresenti.add(opt);
 			}
 		}
-		model.addAttribute("optionals",optionalNonPresenti );
+		model.addAttribute("optionals", optionalNonPresenti);
 		return "supplier/manageOptionals.html";
 	}
 	
@@ -135,7 +135,7 @@ public class OptionalController {
 		car.getOptionals().add(optCar);
 		this.carService.save(car);
 		model.addAttribute("car",car);
-		return "admin/formUpdateCar.html";
+		return "redirect:/admin/formUpdateCar/" + car.getId();
 	}
 	
 	@GetMapping(value = "supplier/setOptionalToCar/{idCar}/{idOptional}")
@@ -150,6 +150,6 @@ public class OptionalController {
 		car.getOptionals().add(optCar);
 		this.carService.save(car);
 		model.addAttribute("car",car);
-		return "supplier/formUpdateCar.html";
+		return "redirect:/supplier/manageOptionals/" + car.getId();
 	}
 }

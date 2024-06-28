@@ -31,7 +31,7 @@ public class OptionalCarController {
 		this.optCarService.remove(optCar);
 		this.carService.save(car);
 		model.addAttribute("car", car);
-		return "admin/formUpdateCar.html";
+		return "redirect:/admin/formUpdateCar/" + car.getId();
 	}
 	
 	@GetMapping(value = "supplier/removeOptional/{idCar}/{idOptional}")
@@ -42,7 +42,7 @@ public class OptionalCarController {
 		this.optCarService.remove(optCar);
 		this.carService.save(car);
 		model.addAttribute("car", car);
-		return "supplier/formUpdateCar.html";
+		return "redirect:/supplier/manageOptionals/" + car.getId();
 	}
 	
 }

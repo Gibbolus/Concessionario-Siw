@@ -99,7 +99,7 @@ public class ReviewController{
 			Supplier supplier = currentUser.getSupplier();
 			model.addAttribute("reviews",supplier.getReviews()); //passa solo le review del fornitore corrente
 		
-			return "manageReviews.html";
+			return "supplier/manageReviews.html";
 		}
 	}
 	
@@ -115,7 +115,7 @@ public class ReviewController{
 		carReviews.remove(review);
 		
 		this.reviewService.remove(review);
-		return "redirect:/car/"+ reviewdCar.getId();
+		return "redirect:/manageReviews";
 	}
 	
 	
