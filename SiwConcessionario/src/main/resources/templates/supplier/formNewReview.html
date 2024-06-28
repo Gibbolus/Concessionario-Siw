@@ -40,24 +40,32 @@
 
 
 	<div class="form-container">
-		<form class="form" id="optional" th:action="@{/review}" method="POST" th:object="${review}">
-			<h1 class="center">Aggiungi una Recensione</h1>
-			<div th:if="${#fields.hasGlobalErrors()}">
+		<form class="form" id="review" th:action="@{/review}" method="POST" th:object="${review}">
+			<div class="header">
+				<h1>Aggiungi una Recensione</h1>
+			</div>
+			<div class="review-error" th:if="${#fields.hasGlobalErrors()}">
 				<p class="error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
 			</div>
+			
+			<input type="hidden" name="carId" th:value="${car.id}" />
+			
 			<div class="input-box">
 				<input required type="text" class="input-field" th:field="${review.recensione}" placeholder="Recensisci"/>
-				<span th:if="${#fields.hasErrors('recensione')}" th:errors="*{recensione}">
+				<span th:if="${#fields.hasErrors('recensione')}" th:errors="*{recensione}">mscosmc</span>
 			</div>
+			
 			<div class="input-box">
 				<input required type="number" class="input-field" th:field="${review.voto}" placeholder="Voto"/>
-				<span th:if="${#fields.hasErrors('voto')}" th:errors="*{voto}">
+				<span th:if="${#fields.hasErrors('voto')}" th:errors="*{voto}">momd </span>
 			</div>
-			<input type="hidden" name="carId" th:value="${car.id}" />
+			
+			
 			<div class="input-submit">
 				<button class="submit-btn" id="submit"></button>
 				<label for="submit">Conferma</label>
 			</div>
+			
 		</form>
 	</div>
 	

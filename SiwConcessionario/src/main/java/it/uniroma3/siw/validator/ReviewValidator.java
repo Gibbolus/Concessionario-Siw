@@ -22,10 +22,10 @@ public class ReviewValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		Review r=(Review) target;
 		if(r.getVoto()<0 || r.getVoto()>10) {
-			errors.reject("error.voto");
+			errors.reject("voto.error");
 		}
 		if(r.supplier.equals(r.car.supplier)) {
-			errors.reject("error.recensione");
+			errors.reject("recensione.error");
 		}
 		for(Review review: r.car.getReviews()) { //sfoglia tutte le recensioni
 			if(review.getSupplier().equals(r.getSupplier())) { //se tra le recensioni ne trovi una con lo stesso fornitore

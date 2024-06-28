@@ -16,9 +16,6 @@ public class Car {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@OneToMany
-	public List<Review> reviews;
-
 	private String modello;
 
 	private String marca;
@@ -32,6 +29,10 @@ public class Car {
 
 	@OneToMany(mappedBy = "car")
 	public List<OptionalCar> optionals;
+	
+	@OneToMany
+	public List<Review> review;
+
 
 	public Long getId() {
 		return id;
@@ -42,11 +43,11 @@ public class Car {
 	}
 
 	public List<Review> getReviews() {
-		return reviews;
+		return review;
 	}
 
 	public void setReviews(List<Review> reviews) {
-		this.reviews = reviews;
+		this.review = reviews;
 	}
 
 	public String getModello() {

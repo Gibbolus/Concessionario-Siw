@@ -78,6 +78,7 @@ public class ReviewController{
 			supplier.getReviews().add(review);
 			reviewdCar.getReviews().add(review);
 			this.reviewService.save(review);
+			this.carService.save(reviewdCar);
 			return "redirect:review/" + review.getId();
 		}
 		else

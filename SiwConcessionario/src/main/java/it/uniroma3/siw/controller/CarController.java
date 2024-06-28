@@ -19,10 +19,12 @@ import it.uniroma3.siw.model.Car;
 import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.Supplier;
 import it.uniroma3.siw.model.OptionalCar;
+import it.uniroma3.siw.model.Review;
 import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.service.CarService;
 import it.uniroma3.siw.service.CredentialsService;
 import it.uniroma3.siw.service.OptionalCarService;
+import it.uniroma3.siw.service.ReviewService;
 import it.uniroma3.siw.validator.CarValidator;
 import jakarta.persistence.EntityManager;
 import jakarta.validation.Valid;
@@ -35,6 +37,9 @@ public class CarController {
 
 	@Autowired
 	OptionalCarService optCarService;
+
+	@Autowired
+	ReviewService reviewService;
 
 	@Autowired
 	GlobalController gc;
@@ -104,16 +109,24 @@ public class CarController {
 		if (s != null) {
 			s.getCars().remove(car);
 		}
-		if (car.getOptionals().isEmpty()) {
+		if (car.getOptionals().isEmpty() && car.getReviews().isEmpty()) {
 			this.carService.delete(car);
 			return "redirect:/supplier/manageCars";
 		} else {
-			for (OptionalCar optCar : car.getOptionals()) {
-				optCar.setCar(null);
-				this.optCarService.remove(optCar);
+			if (!car.getOptionals().isEmpty()) {
+				for (OptionalCar optCar : car.getOptionals()) {
+					optCar.setCar(null);
+					this.optCarService.remove(optCar);
+				}
+				car.getOptionals().removeAll(car.getOptionals());
 			}
-			car.getOptionals().removeAll(car.getOptionals());
-
+			if (!car.getReviews().isEmpty()) {
+				for (Review review : car.getReviews()) {
+					review.setCar(null);
+					this.reviewService.save(review);
+				}
+				car.getReviews().removeAll(car.getReviews());
+			}
 		}
 		this.carService.delete(car);
 		return "redirect:/supplier/manageCars";
@@ -128,6 +141,7 @@ public class CarController {
 		Supplier fornitore = utenteCorrente.getSupplier();
 		car.setSupplier(fornitore);
 		car.optionals = new ArrayList<OptionalCar>();
+		car.review = new ArrayList<Review>();
 
 		this.carValidator.validate(car, carBindingResult);
 		if (!carBindingResult.hasErrors()) {
@@ -168,21 +182,27 @@ public class CarController {
 		if (s != null) {
 			s.getCars().remove(car);
 		}
-
-		if (car.getOptionals().isEmpty()) {
+		if (car.getOptionals().isEmpty() && car.getReviews().isEmpty()) {
 			this.carService.delete(car);
-			return "supplier/index.html";
+			return "redirect:/supplier/manageCars";
 		} else {
-			for (OptionalCar optCar : car.getOptionals()) {
-				optCar.setCar(null);
-				this.optCarService.remove(optCar);
+			if (!car.getOptionals().isEmpty()) {
+				for (OptionalCar optCar : car.getOptionals()) {
+					optCar.setCar(null);
+					this.optCarService.remove(optCar);
+				}
+				car.getOptionals().removeAll(car.getOptionals());
 			}
-			car.getOptionals().removeAll(car.getOptionals());
-
+			if (!car.getReviews().isEmpty()) {
+				for (Review review : car.getReviews()) {
+					review.setCar(null);
+					this.reviewService.save(review);
+				}
+				car.getReviews().removeAll(car.getReviews());
+			}
 		}
-
 		this.carService.delete(car);
-		return "admin/index.html";
+		return "redirect:/supplier/manageCars";
 
 	}
 
