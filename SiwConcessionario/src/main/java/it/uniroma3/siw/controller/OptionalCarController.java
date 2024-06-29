@@ -31,7 +31,7 @@ public class OptionalCarController {
 		this.optCarService.remove(optCar);
 		this.carService.save(car);
 		model.addAttribute("car", car);
-		return "redirect:/admin/formUpdateCar/" + car.getId();
+		return "redirect:/admin/manageOptionals/" + car.getId();
 	}
 	
 	@GetMapping(value = "supplier/removeOptional/{idCar}/{idOptional}")

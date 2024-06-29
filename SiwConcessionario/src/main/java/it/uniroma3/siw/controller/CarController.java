@@ -184,7 +184,7 @@ public class CarController {
 		}
 		if (car.getOptionals().isEmpty() && car.getReviews().isEmpty()) {
 			this.carService.delete(car);
-			return "redirect:/supplier/manageCars";
+			return "redirect:/admin/manageCars";
 		} else {
 			if (!car.getOptionals().isEmpty()) {
 				for (OptionalCar optCar : car.getOptionals()) {
@@ -202,7 +202,7 @@ public class CarController {
 			}
 		}
 		this.carService.delete(car);
-		return "redirect:/supplier/manageCars";
+		return "redirect:/admin/manageCars";
 
 	}
 

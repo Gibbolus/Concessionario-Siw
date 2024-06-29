@@ -63,7 +63,7 @@
 					<span th:unless="${car.supplier!=null}">Non disponibile</span>
 				</div>
 				<div th:if="${userDetails}" id="review">
-					<a th:href="@{'/supplier/formNewReview/' + ${car.id}}"> Aggiungi una
+					<a th:href="@{'/formNewReview/' + ${car.id}}"> Aggiungi una
 						recensione </a>
 				</div>
 				<div th:if="${userDetails}" id="review">

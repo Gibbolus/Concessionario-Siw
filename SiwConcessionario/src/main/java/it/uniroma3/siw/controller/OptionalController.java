@@ -135,7 +135,7 @@ public class OptionalController {
 		car.getOptionals().add(optCar);
 		this.carService.save(car);
 		model.addAttribute("car",car);
-		return "redirect:/admin/formUpdateCar/" + car.getId();
+		return "redirect:/admin/manageOptionals/" +car.getId();
 	}
 	
 	@GetMapping(value = "supplier/setOptionalToCar/{idCar}/{idOptional}")

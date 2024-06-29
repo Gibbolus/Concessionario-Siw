@@ -115,13 +115,9 @@ a:hover{
 
 
 
-.review-error{
-	displaY:flex;
-	height:10%;
+
+.error{
 	text-align: center;
-    
-}
-.review-error .error{
 	color:red;
 	font-size: 17px;
 }

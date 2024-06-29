@@ -85,7 +85,7 @@ public class SupplierController {
 	public String removeSupplier(@PathVariable("id") Long id) {
 		Supplier s = this.supplierService.findById(id);
 		this.supplierService.remove(s);
-		return "admin/index.html";
+		return "redirect:/admin/manageSuppliers";
 	}
 
 }

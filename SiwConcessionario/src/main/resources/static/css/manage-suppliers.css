@@ -81,47 +81,47 @@ a:hover {
 
 
 
-.addCar {
-	display:block;
+.addSupplier {
+	display: block;
 	text-align: end;
 	margin: 1vw 2vw 2vw 0;
-	float: right;
+	float:right;
 }
 
 
-.addCar a {
+.addSupplier a {
 	font-size: larger;
 	font-weight: 600;
 	color: black;
 	text-decoration: none;
 }
 
-.addCar a:hover {
+.addSupplier a:hover {
 	color: blue;
 }
 
-.addCar .span {
+.addSupplier .span {
 	width: 30px;
 	height: auto;
 }
 
-.noCars {
+.noSuppliers {
 	margin-top:3%;
 	display: flex;
 	flex-direction: column;
 }
 
-.noCars p {
+.noSuppliers p {
 	text-align: center;
 	font-size: 25px;
 	font-weight: 300;
 }
 
-.noCars .material-symbols-outlined {
+.noSuppliers .material-symbols-outlined {
 	text-align: center;
 }
 
-.cars .container {
+.suppliers .container {
 	width:95%;
 	margin-top:3%;
 	margin-left: 40px;
@@ -131,7 +131,7 @@ a:hover {
 	flex-wrap: wrap;
 }
 
-.boxCar {
+.boxSupplier {
 	background-color: rgba(192, 192, 192, 0.9);
 	box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.85);
 	margin: 10px;
@@ -144,7 +144,7 @@ a:hover {
 	position: relative;
 }
 
-.boxCar img {
+.boxSupplier img {
 	border-radius: inherit;
 	display: block;
 	object-fit: cover;
@@ -153,7 +153,7 @@ a:hover {
 	height: 75%;
 }
 
-.boxCar a {
+.boxSupplier a {
 	display: block;
 	text-align: center;
 	color: black;
@@ -163,26 +163,19 @@ a:hover {
 	margin-bottom: 10px;
 }
 
-.boxCar a:hover {
+.boxSupplier a:hover {
 	color: blue;
 }
 
-.boxCar .options {
+.boxSupplier .options {
 	display: flex;
-	justify-content: space-around;
-}
-
-.options .update {
-	margin-top: 3px;
+	justify-content:center;
 }
 
 .options .remove:hover {
 	color: red;
 }
 
-.options .update:hover {
-	color: limegreen;
-}
 
 @media(max-width: 768px) {
 

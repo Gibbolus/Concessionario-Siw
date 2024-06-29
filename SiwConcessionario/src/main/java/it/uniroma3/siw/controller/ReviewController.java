@@ -53,12 +53,19 @@ public class ReviewController{
 		return "reviews.html";
 	}
 	
-	@GetMapping(value = "/supplier/formNewReview/{carId}")
+	@GetMapping(value = "/formNewReview/{carId}")
 	public String formNewReview(@PathVariable("carId") Long carId, Model model) {
 		Review review = new Review();
 		Car c = carService.findById(carId);
 		model.addAttribute("car", c);
 		model.addAttribute("review", review);
+		
+		UserDetails u = gc.getUser();
+		String username = u.getUsername();
+		Credentials credentials = this.credentialsService.getCredentials(username);
+		if(credentials.getRole().equals("ADMIN")) {
+			return "admin/formNewReview.html";
+		}
 		return "supplier/formNewReview.html";
 	}
 	
@@ -82,6 +89,9 @@ public class ReviewController{
 			return "redirect:review/" + review.getId();
 		}
 		else
+			if(credentials.getRole().equals("ADMIN")) {
+				return "redirect:/admin/formNewReview"+ reviewdCar.getId();
+			}
 			return "redirect:/supplier/formNewReview/" + reviewdCar.getId();
 	}
 	

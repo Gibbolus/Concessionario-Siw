@@ -48,7 +48,7 @@
 			<p>Spiacenti nessuna Auto trovata</p>
 		</div>
 		<div class="addCar">
-			<a style="display: flex; align-items: center;" href="/supplier/addCar"> Aggiungi una Macchina
+			<a  href="/supplier/addCar"> Aggiungi una Macchina
 				<span class="material-symbols-outlined">add_circle</span>
 			</a>
 		</div>
@@ -59,7 +59,7 @@
 					alt="Immagine Auto">
 				<a th:href="@{'/car' + '/' + ${car.id}}" th:text="${car.modello} +' ' +${car.marca}">Modello Marca</a>
 				<div class="options">
-					<a class="update" title="modifica" th:href="@{'/supplier/formUpdateCar/' + ${car.id} }">
+					<a class="update" title="modifica" th:href="@{'/supplier/manageOptionals/' + ${car.id} }">
 						<span class="material-symbols-outlined">edit_note</span>
 					</a>
 					<a class="remove" title="elimina" th:href="@{'/supplier/removeCar/' + ${car.id} }">

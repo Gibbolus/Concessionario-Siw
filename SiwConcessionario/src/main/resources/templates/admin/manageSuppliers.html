@@ -1,20 +1,96 @@
 <!DOCTYPE html>
-<html>
-	
-	<head>
-		<title> Elenco Fornitori</title>
-		<link rel="stylesheet" href="/stile.css?version=2" />
-	</head>
-	
-	<body>
-		<div> <a href="/"> <img src="/images/logo-siw.png" width="50%"/> </a> </div>
-		<h1> Fornitori</h1>
-		<div th:if="${suppliers.isEmpty()}">Non ci sono fornitori nel sistema</div>
-		<ul>
-			<li th:each="supplier : ${suppliers}">
-				<a th:text="${supplier.name} + ' ' + ${supplier.surname}">Up!</a>
-				<a th:href="@{'/admin/removeSupplier/' + ${supplier.id} }">Rimuovi fornitore</a>
+<html lang="it">
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<title>Gestisci Fornitori</title>
+	<link rel="stylesheet" href="/css/manage-suppliers.css" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+</head>
+
+<body>
+
+	<nav class="nav-bar">
+		<a href="/">
+			<img class="icons-home" src="/images/home.png"></img>
+		</a>
+		<h3 class="siw-text"> SiwConcessionario </h3>
+		<ul class="nav-menu">
+			<li class="nav-item">
+				<a class="ali" href="/car">Catalogo</a>
+			</li>
+			<li class="nav-item">
+				<a class="ali" href="/supplier">Fornitori</a>
+			</li>
+			<li class="nav-item">
+				<div class="account-reg-log">
+					<a th:if="${userDetails}" id="reg-button" class="reg-log-button" href="/logout"> Logout </a>
+					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati
+					</a>
+					<a th:unless="${userDetails}" class="reg-log-button" href="/login"> Login </a>
+				</div>
 			</li>
 		</ul>
-	</body>
+		<div class="hamburger">
+			<span class="bar"></span>
+			<span class="bar"></span>
+			<span class="bar"></span>
+		</div>
+	</nav>
+
+
+	<section class="suppliers">
+		<div class="noSuppliers" th:if="${suppliers.isEmpty()}">
+			<span class="material-symbols-outlined">Error</span>
+			<p>Spiacenti nessun Fornitore trovato</p>
+		</div>
+		<div class="addSupplier">
+			<a  href="/admin/formNewSupplier"> Aggiungi un Fornitore
+				<span class="material-symbols-outlined">add_circle</span>
+			</a>
+		</div>
+		<ul class="container">
+			<li class="boxSupplier" th:each="supplier : ${suppliers}">
+				<img th:if="${supplier.urlImage.startsWith('https')}" th:src="${supplier.urlImage}" alt="Immagine Fornitore">
+				<img th:unless="${supplier.urlImage.startsWith('https')}" th:src="@{/images/__${supplier.urlImage}__} "
+					alt="Immagine Fornitore">
+				<a th:href="@{'/supplier' + '/' + ${supplier.id}}" th:text="${supplier.name} +' ' +${supplier.surname}">Nome Cognome</a>
+				<div class="options">
+					<a class="remove" title="elimina" th:href="@{'/admin/removeSupplier/' + ${supplier.id} }">
+						<i class="fa fa-trash"></i>
+					</a>
+				</div>
+			</li>
+		</ul>
+	</section>
+
+
+	<script>
+		const hamburger = document.querySelector(".hamburger");
+		const navMenu = document.querySelector(".nav-menu");
+		hamburger.addEventListener("click", () => {
+			hamburger.classList.toggle("active");
+			navMenu.classList.toggle("active");
+		})
+		document.querySelectorAll(".nav-link").forEach(n => n.addeaddEventListener("click", () => {
+			hamburger.classList.remove("active");
+			navMenu.classList.remove("active");
+		}))
+	</script>
+</body>
+
 </html>
+
+
+
+
+
+
+
+
+
+
+
