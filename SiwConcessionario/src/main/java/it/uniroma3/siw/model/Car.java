@@ -2,12 +2,16 @@ package it.uniroma3.siw.model;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Car {
@@ -24,15 +28,17 @@ public class Car {
 
 	private String urlImage;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.DETACH)
 	public Supplier supplier;
 
-	@OneToMany(mappedBy = "car")
+	@OneToMany(mappedBy = "car", cascade = CascadeType.DETACH)
 	public List<OptionalCar> optionals;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.REMOVE)
 	public List<Review> review;
-
+	
+	@Transient
+	private MultipartFile immagine;
 
 	public Long getId() {
 		return id;

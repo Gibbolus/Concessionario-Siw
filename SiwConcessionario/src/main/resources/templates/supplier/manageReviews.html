@@ -50,10 +50,7 @@
 
 		<ul class="container">
 			<li class="boxReview" th:each="review : ${reviews}">
-				<img th:if="${review.getCar().urlImage.startsWith('https')}" th:src="${review.getCar().urlImage}"
-					alt="Immagine Auto Recensita">
-				<img th:unless="${review.getCar().urlImage.startsWith('https')}"
-					th:src="@{/images/__${review.getCar().urlImage}__} " alt="Immagine Auto Recensita">
+				<img th:src="@{/images/__${review.getCar().urlImage}__} " alt="Immagine Auto Recensita">
 				<a th:href="@{'/review' + '/' + ${review.id}}" th:text="${review.getCar().modello} +' ' 
 					+${review.getCar().marca}">Modello Marca Auto</a>
 				<div class="voto">

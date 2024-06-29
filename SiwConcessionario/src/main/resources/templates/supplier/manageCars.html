@@ -54,8 +54,7 @@
 		</div>
 		<ul class="container">
 			<li class="boxCar" th:each="car : ${cars}">
-				<img th:if="${car.urlImage.startsWith('https')}" th:src="${car.urlImage}" alt="Immagine Auto">
-				<img th:unless="${car.urlImage.startsWith('https')}" th:src="@{/images/__${car.urlImage}__} "
+				<img th:src="@{/images/__${car.urlImage}__} "
 					alt="Immagine Auto">
 				<a th:href="@{'/car' + '/' + ${car.id}}" th:text="${car.modello} +' ' +${car.marca}">Modello Marca</a>
 				<div class="options">

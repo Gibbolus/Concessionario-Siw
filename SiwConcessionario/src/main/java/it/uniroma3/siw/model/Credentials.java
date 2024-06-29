@@ -24,7 +24,7 @@ public class Credentials {
 	
 	private String role;
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private User user;
 
 	public String getUsername() {

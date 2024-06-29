@@ -3,11 +3,16 @@ package it.uniroma3.siw.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Supplier {
@@ -16,10 +21,10 @@ public class Supplier {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@OneToMany(mappedBy = "supplier")
+	@OneToMany(mappedBy = "supplier", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	List<Car> cars;
 
-	@OneToMany(mappedBy = "supplier")
+	@OneToMany(mappedBy = "supplier", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	public List<Review> reviews;
 
 	private String name;
@@ -29,6 +34,9 @@ public class Supplier {
 	private LocalDate birth;
 	
 	private String urlImage;
+	
+	@Transient
+	private MultipartFile immagine;
 
 	public Long getId() {
 		return id;

@@ -42,9 +42,7 @@
 		</div>
 		<div class="img-text">
 			<div>
-				<img class="img" style="max-height: 30rem;" th:if="${supplier.urlImage.startsWith('https')}" th:src="${supplier.urlImage}">
-				<img class="img" style="max-height: 30rem;" th:unless="${supplier.urlImage.startsWith('https')}"
-					th:src="@{/images/__${supplier.urlImage}__}">
+				<img class="img" style="max-height: 30rem;" th:src="@{/images/__${supplier.urlImage}__}">
 			</div>
 			<div class="infos" id="text-sup">
 				<br>

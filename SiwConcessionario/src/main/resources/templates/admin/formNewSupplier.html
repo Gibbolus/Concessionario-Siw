@@ -38,7 +38,7 @@
 	</nav>
 
 	<div class="form-container">
-		<form class="form" id="supplier" th:action="@{/sup}" method="POST" th:object="${supplier}">
+		<form class="form" id="supplier" th:action="@{/sup}" method="POST" th:object="${supplier}" enctype="multipart/form-data">
 			<h1 class="center" style="text-align: center;">Nuovo Fornitore</h1>
 			<div th:if="${#fields.hasGlobalErrors()}">
 				<p class="error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
@@ -56,7 +56,7 @@
 				<span th:if="${#fields.hasErrors('birth')}" th:errors="*{birth}">
 			</div>
 			<div class="input-box">
-				<input type="url" class="input-field" th:field="${supplier.urlImage}" placeholder="Url Immagine"/>
+				<input class="input-field" type="file" placeholder="Immagine" name="immagine"/>
 			</div>
 			<div class="input-submit">
 				<button class="submit-btn" id="submit"></button>

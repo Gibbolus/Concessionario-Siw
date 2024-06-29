@@ -54,8 +54,7 @@
 		</div>
 		<ul class="container">
 			<li class="boxSupplier" th:each="supplier : ${suppliers}">
-				<img th:if="${supplier.urlImage.startsWith('https')}" th:src="${supplier.urlImage}" alt="Immagine Fornitore">
-				<img th:unless="${supplier.urlImage.startsWith('https')}" th:src="@{/images/__${supplier.urlImage}__} "
+				<img th:src="@{/images/__${supplier.urlImage}__} "
 					alt="Immagine Fornitore">
 				<a th:href="@{'/supplier' + '/' + ${supplier.id}}" th:text="${supplier.name} +' ' +${supplier.surname}">Nome Cognome</a>
 				<div class="options">

@@ -1,5 +1,10 @@
 package it.uniroma3.siw.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,12 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.model.Car;
 
@@ -32,6 +39,8 @@ import jakarta.validation.Valid;
 @Controller
 public class CarController {
 
+	private static final String UPLOAD_DIR = "C:\\Users\\Gabriele\\git\\Concessionario\\SiwConcessionario\\src\\main\\resources\\static\\images";
+	
 	@Autowired
 	CarService carService;
 
@@ -133,27 +142,42 @@ public class CarController {
 	}
 
 	@PostMapping(value = "/car")
-	public String newCar(@Valid @ModelAttribute("car") Car car, BindingResult carBindingResult) {
+	public String newCar(@Valid @ModelAttribute("car") Car car, @RequestParam("immagine") MultipartFile file, BindingResult carBindingResult, Model model) {
 		UserDetails u = gc.getUser();
 		String username = u.getUsername();
 		Credentials credenziali = this.credentialsService.getCredentials(username);
 		User utenteCorrente = credenziali.getUser();
-		Supplier fornitore = utenteCorrente.getSupplier();
-		car.setSupplier(fornitore);
+		Supplier supplier = utenteCorrente.getSupplier();
+		
+		car.setSupplier(supplier);
 		car.optionals = new ArrayList<OptionalCar>();
 		car.review = new ArrayList<Review>();
 
 		this.carValidator.validate(car, carBindingResult);
 		if (!carBindingResult.hasErrors()) {
-			fornitore.getCars().add(car);
-			this.carService.save(car);
-			return "redirect:car/" + car.getId();
-		} else {
-			if (credenziali.getRole().equals("SUPPLIER"))
-				return "/supplier/addCar.html";
-			else
-				return "/admin/addCar.hmtl";
+			if(!file.isEmpty()) {
+				try {
+					String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+					Path path = Paths.get(UPLOAD_DIR + File.separator + fileName);
+					Files.write(path, file.getBytes());
+					car.setUrlImage(fileName);
+					
+					supplier.getCars().add(car);
+					this.carService.save(car);
+					model.addAttribute("car", car);
+					
+					return "redirect:car/" + car.getId();
+					
+				} catch (IOException e) {
+					e.printStackTrace();
+					return "addCar.hmtl";
+				}
+			}
 		}
+		if (credenziali.getRole().equals("SUPPLIER"))
+			return "/supplier/addCar.html";
+		else
+			return "/admin/addCar.hmtl";
 	}
 
 	@GetMapping(value = "/admin/addCar")

@@ -43,10 +43,7 @@
 	<div class="main-container" th:if="${review}">
 		<div class="review-container">
 			<div class="img-car">
-				<img class="img" th:if="${review.getCar().urlImage.startsWith('https')}"
-					th:src="${review.getCar().urlImage}">
-				<img class="img" th:unless="${review.getCar().urlImage.startsWith('https')}"
-					th:src="@{/images/__${review.getCar().urlImage}__}">
+				<img class="img" th:src="@{/images/__${review.getCar().urlImage}__}">
 			</div>
 
 			<div>

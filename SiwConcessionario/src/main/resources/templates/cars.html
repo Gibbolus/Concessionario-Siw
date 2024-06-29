@@ -56,9 +56,7 @@
 	<div class="container">
 		<div class="main-container" th:each="car : ${cars}">
 			<a th:href="@{'/car' + '/' + ${car.id}}">
-				<img class="img" th:if="${car.urlImage.startsWith('https')}" th:src="${car.urlImage}">
-				<img class="img" th:unless="${car.urlImage.startsWith('https')}"
-					th:src="@{/images/__${car.urlImage}__}">
+				<img class="img" th:src="@{/images/__${car.urlImage}__}">
 			</a>
 			<h2 class="car-text" th:text="${car.marca} +' ' +${car.modello}"></h2>
 		</div>
