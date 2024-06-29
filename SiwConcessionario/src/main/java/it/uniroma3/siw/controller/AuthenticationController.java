@@ -1,5 +1,11 @@
 package it.uniroma3.siw.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -7,10 +13,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.model.Supplier;
 import it.uniroma3.siw.model.Credentials;
@@ -24,6 +33,8 @@ import jakarta.validation.Valid;
 
 @Controller
 public class AuthenticationController {
+	
+	private static final String UPLOAD_DIR = "C:\\Users\\Gabriele\\git\\Concessionario\\SiwConcessionario\\src\\main\\resources\\static\\images";
 	
 	@Autowired
 	private CredentialsService credentialsService;
@@ -82,7 +93,7 @@ public class AuthenticationController {
     public String registerUser(@Valid @ModelAttribute("user") User user,
                  BindingResult userBindingResult, @Valid
                  @ModelAttribute("credentials") Credentials credentials,
-                 BindingResult credentialsBindingResult,
+                 @RequestParam("immagine") MultipartFile file, BindingResult credentialsBindingResult,
                  Model model) {
 		
 		this.credentialsValidator.validate(credentials, credentialsBindingResult);
@@ -90,9 +101,22 @@ public class AuthenticationController {
 		
 		// se user e credential hanno entrambi contenuti validi, memorizza User e the Credentials nel DB
         if(!credentialsBindingResult.hasErrors() && !userBindingResult.hasErrors()) {
-            credentials.setUser(user);
+        	if (!file.isEmpty())
+				try {
+					String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+					Path path = Paths.get(UPLOAD_DIR + File.separator + fileName);
+					Files.write(path, file.getBytes());
+					user.setUrlImage(fileName);
+				} catch (IOException e) {
+					e.printStackTrace();
+					return "registerUser";
+				}
+        	
+        	userService.saveUser(user);
+        	credentials.setUser(user);
             credentialsService.saveCredentials(credentials);
-            model.addAttribute("user", user);
+            
+            
             Supplier newSupplier= new Supplier();
             newSupplier.setName(user.getName());
             newSupplier.setSurname(user.getSurname());
@@ -100,8 +124,8 @@ public class AuthenticationController {
             newSupplier.setUrlImage(user.getUrlImage());
             user.setSupplier(newSupplier);
             this.supplierService.save(newSupplier);
-            userService.saveUser(user);
             
+            model.addAttribute("user", user);
             return "login.html";
         }
         return "register.html";

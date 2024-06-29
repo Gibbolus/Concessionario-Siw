@@ -1,16 +1,23 @@
 package it.uniroma3.siw.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.model.Supplier;
 import it.uniroma3.siw.service.SupplierService;
@@ -20,6 +27,8 @@ import jakarta.validation.Valid;
 
 @Controller
 public class SupplierController {
+
+	private static final String UPLOAD_DIR = "C:\\Users\\Gabriele\\git\\Concessionario\\SiwConcessionario\\src\\main\\resources\\static\\images";
 
 	@Autowired
 	SupplierService supplierService;
@@ -64,15 +73,26 @@ public class SupplierController {
 
 	@PostMapping(value = "/sup")
 	public String newSupplier(@Valid @ModelAttribute("supplier") Supplier supplier,
-			BindingResult supplierBindingResult) {
+			@RequestParam("immagine") MultipartFile file, BindingResult supplierBindingResult, Model model) {
 		this.supplierValidator.validate(supplier, supplierBindingResult);
 		if (!supplierBindingResult.hasErrors()) {
-			this.supplierService.save(supplier);
-			return "redirect:supplier/" + supplier.getId();
+			try {
+				String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+				Path path = Paths.get(UPLOAD_DIR + File.separator + fileName);
+				Files.write(path, file.getBytes());
+				supplier.setUrlImage(fileName);
+
+				this.supplierService.save(supplier);
+				model.addAttribute("supplier", supplier);
+
+				return "redirect:supplier/" + supplier.getId();
+
+			} catch (IOException e) {
+				e.printStackTrace();
+				return "admin/formNewSupplier.html.hmtl";
+			}
 		}
-		else {
-			return "admin/formNewSupplier.html";
-		}
+		return "admin/formNewSupplier.html";
 	}
 
 	@GetMapping(value = "/admin/manageSuppliers")
