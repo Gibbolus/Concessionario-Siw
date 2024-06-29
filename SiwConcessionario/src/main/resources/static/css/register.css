@@ -8,7 +8,10 @@
 }
 
 body {
-	background-color: #dfdfdf
+	background-image:linear-gradient(rgba(86, 89, 92, 0.5),rgba(86, 89, 92, 0.5)),
+	url(/images/background-register.jpg);
+	background-position: center;
+	background-size:cover;
 }
 
 .nav-bar {
@@ -41,7 +44,6 @@ body {
 
 .nav-bar li {
 	list-style: none;
-	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 	font-size: larger;
 }
 
@@ -84,13 +86,7 @@ body {
 .register-box {
 	display: flex;
 	justify-content: center;
-	background-image:linear-gradient(rgba(86, 89, 92, 0.5),rgba(86, 89, 92, 0.5)),
-	url(/images/background-register.jpg);
-	background-position: center;
-	background-size:cover;
-	height:95%;
 	align-items: center;
-
 }
 .form{
 	display: flex;

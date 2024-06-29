@@ -36,45 +36,45 @@
 
 
 	<div class="register-box">
-		<form class="form" th:action="@{/register}" method="POST" th:object="${credentials}" enctype="multipart/form-data">
+		<form class="form" th:action="@{/register}" method="POST" th:object="${credentials}"
+			enctype="multipart/form-data">
 
 			<div class="register-header">
 				<h1>Registrazione</h1>
 			</div>
-				<div class="register-error" th:if="${#fields.hasGlobalErrors()}">
-					<p class="error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
-				</div>
+			<div class="register-error" th:if="${#fields.hasGlobalErrors()}">
+				<p class="error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+			</div>
 
-				<div class="register-input">
-					<input class="input-field" type="text" placeholder="Nome" required th:field="${user.name}" />
-				</div>
-				<div class="register-input">
-					<input class="input-field" type="text" placeholder="Società" required th:field="${user.surname}" />
-				</div>
-				<div class="register-input">
-					<input class="input-field" type="date" placeholder="Anno di fondazione" required
-						th:field="${user.birth}" />
-				</div>
-				<div class="register-input">
-					<input class="input-field" type="file" placeholder="Immagine" name="immagine" required/>
-				</div>
-				<div class="register-input">
-					<input class="input-field" type="text" placeholder="Username" required
-						th:field="${credentials.username}" />
-					<span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
-				</div>
-				<div class="register-input">
-					<input class="input-field" type="password" placeholder="Password" required
-						th:field="${credentials.password}" />
-					<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"> </span>
-				</div>
-				<div class="input-submit">
-					<button class="submit-btn" id="submit"></button>
-					<label for="submit">Entra</label>
-				</div>
-			
+			<div class="register-input">
+				<input class="input-field" type="text" placeholder="Nome" required th:field="${user.name}" />
+			</div>
+			<div class="register-input">
+				<input class="input-field" type="text" placeholder="Società" required th:field="${user.surname}" />
+			</div>
+			<div class="register-input">
+				<input class="input-field" type="date" placeholder="Anno di fondazione" required
+					th:field="${user.birth}" />
+			</div>
+			<div class="register-input">
+				<input class="input-field" type="file" placeholder="Immagine" name="immagine" required />
+			</div>
+			<div class="register-input">
+				<input class="input-field" type="text" placeholder="Username" required
+					th:field="${credentials.username}" />
+				<span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+			</div>
+			<div class="register-input">
+				<input class="input-field" type="password" placeholder="Password" required
+					th:field="${credentials.password}" />
+				<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"> </span>
+			</div>
+			<div class="input-submit">
+				<button class="submit-btn" id="submit"></button>
+				<label for="submit">Entra</label>
+			</div>
+		</form>
 	</div>
-	</form>
 
 	<script>
 		const hamburger = document.querySelector(".hamburger");

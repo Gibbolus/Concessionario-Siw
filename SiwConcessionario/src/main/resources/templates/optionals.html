@@ -1,19 +1,80 @@
 <!DOCTYPE html>
-<html>
-	
-	<head>
-		<title> Elenco Optionals</title>
-		<link rel="stylesheet" href="/stile.css?version=2" />
-	</head>
-	
-	<body>
-		<div> <a href="/"> <img src="/images/logo-siw.png" width="50%"/> </a> </div>
-		<h1> Optionals:</h1>
-		<div th:if="${optionals.isEmpty()}">Non ci sono optionals nel sistema</div>
-		<ul>
-			<li th:each="optional : ${optionals}">
-				<span th:text="${optional.name}"></span>	
+<html lang="it">
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<title> Elenco Optionals</title>
+	<link rel="stylesheet" href="css/model-style.css?version=2" />
+</head>
+
+<body>
+	<nav class="nav-bar">
+		<a href="/">
+			<img class="icons-home" src="/images/home.png"></img>
+		</a>
+		<div class="input-box" id="mobile-show">
+			<form th:action="@{/formSearchOptional}" method="post">
+				<input class="input-field" type="text" th:value="${name}" name="name"
+					placeholder="Cerca un optional..." />
+			</form>
+		</div>
+		<ul class="nav-menu">
+			<div class="input-box" id="main-show">
+				<form th:action="@{/formSearchOptional}" method="post">
+					<input class="input-field" type="text" th:value="${name}" name="name"
+						placeholder="Cerca un optional..." />
+				</form>
+			</div>
+			<li class="nav-item">
+				<a class="ali" href="/car">Catalogo</a>
+			</li>
+			<li class="nav-item">
+				<a class="ali" href="/supplier">Fornitori</a>
+			</li>
+			<li th:if="${userDetails}" class="nav-item">
+				<a class="ali" href="/optional">Optional</a>
+			</li>
+			<li class="nav-item">
+				<div class="account-reg-log">
+					<a th:if="${userDetails}" id="reg-button" class="reg-log-button" href="/logout"> Logout </a>
+					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati
+					</a>
+					<a th:unless="${userDetails}" class="reg-log-button" href="/login"> Login </a>
+				</div>
 			</li>
 		</ul>
-	</body>
+		<div class="hamburger">
+			<span class="bar"></span>
+			<span class="bar"></span>
+			<span class="bar"></span>
+		</div>
+	</nav>
+
+
+
+	<h1 class="center"> Optional </h1>
+	<div class="empty-text" th:if="${optionals.isEmpty()}">Non ci sono optional nel sistema</div>
+	<ul class="grid-container">
+		<li class="grid-list" th:each="optional : ${optionals}">
+			<span class="grid-elem" th:text="${optional.name}"></span>
+		</li>
+	</ul>
+
+
+
+	<script>
+		const hamburger = document.querySelector(".hamburger");
+		const navMenu = document.querySelector(".nav-menu");
+		hamburger.addEventListener("click", () => {
+			hamburger.classList.toggle("active");
+			navMenu.classList.toggle("active");
+		})
+		document.querySelectorAll(".nav-link").forEach(n => n.addeaddEventListener("click", () => {
+			hamburger.classList.remove("active");
+			navMenu.classList.remove("active");
+		}))
+	</script>
+</body>
+
 </html>

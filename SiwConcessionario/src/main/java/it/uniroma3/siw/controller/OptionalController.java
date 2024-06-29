@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.model.Car;
 import it.uniroma3.siw.model.Credentials;
@@ -22,6 +23,7 @@ import it.uniroma3.siw.service.CredentialsService;
 import it.uniroma3.siw.service.OptionalCarService;
 import it.uniroma3.siw.service.OptionalService;
 import it.uniroma3.siw.validator.OptionalValidator;
+import jakarta.persistence.EntityManager;
 import jakarta.validation.Valid;
 
 @Controller
@@ -39,6 +41,8 @@ public class OptionalController {
 	
 	@Autowired CredentialsService credentialsService;
 	
+	@Autowired EntityManager entityManager;
+	
 	
 	@GetMapping(value = "/admin/formNewOptional")
 	public String AdminformNewOptional(Model model) {
@@ -55,6 +59,15 @@ public class OptionalController {
 		
 		return "supplier/formNewOptional.html";
 	}
+	
+	@PostMapping(value = "/formSearchOptional")
+	public String getOptionals(@RequestParam String name, Model model) {
+		String query = "SELECT o FROM Optional o WHERE LOWER(o.name) LIKE LOWER('%" + name + "%')";
+		List<Optional> optionals = this.entityManager.createQuery(query, Optional.class).getResultList();
+		model.addAttribute("optionals", optionals);
+		return "optionals.html";
+	}
+	
 	
 	@PostMapping(value = "/optional")
 	public String newOptional(@Valid @ModelAttribute("optional")Optional opt,
@@ -76,7 +89,7 @@ public class OptionalController {
 		}
 	}
 	
-	@GetMapping(value = "/optional")
+	@GetMapping(value = "optional")
 	  public String showOptionals(Model model) {
 	     model.addAttribute("optionals", this.optionalService.findAll());
 	    return "optionals.html";
