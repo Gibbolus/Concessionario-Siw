@@ -8,7 +8,7 @@ insert into car (id, modello, marca, km, url_image) values(nextval('car_seq'), '
 insert into car (id, modello, marca, km, url_image) values(nextval('car_seq'), 'Corsa', 'Opel', 10000 , 'OpelCorsa.jpg');
 insert into car (id, modello, marca, km, url_image) values(nextval('car_seq'), 'Classe A', 'Mercedes', 50000 , 'MercedesClasseA.jpg');
 insert into car (id, modello, marca, km, url_image) values(nextval('car_seq'), 'Classe C', 'Mercedes', 30000 , 'MercedesClasseC.jpg');
-insert into car (id, modello, marca, km, url_image) values(nextval('car_seq'), 'GLA', 'Mercedes', 20000 , 'MercedesGLA.jpg');
+insert into car (id, modello, marca, km, url_image) values(nextval('car_seq'), 'GLA', 'Mercedes', 20000 , 'MercedesGLA.jepg');
 
 
 
