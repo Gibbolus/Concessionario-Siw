@@ -90,6 +90,8 @@ a:hover {
 
 
 .addSupplier a {
+	display: flex;
+	align-items: center;
 	font-size: larger;
 	font-weight: 600;
 	color: black;

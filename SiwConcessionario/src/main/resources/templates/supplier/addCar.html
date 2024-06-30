@@ -44,11 +44,11 @@
 
 
 	<div class="form-container">
-		
+
 		<form class="form" th:action="@{/car}" method="POST" th:object="${car}" enctype="multipart/form-data">
 			<h1 class="center" style="text-align: center;">Aggiungi una macchina</h1>
 			<div th:if="${#fields.hasGlobalErrors()}">
-				<p  class="error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+				<p class="error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
 			</div>
 			<div class="input-box">
 				<input required type="text" class="input-field" th:field="${car.modello}" placeholder="Modello" />
@@ -59,10 +59,11 @@
 				<input required type="text" class="input-field" th:field="${car.marca}" placeholder="Marca" />
 			</div>
 			<div class="input-box">
-				<input type="number" class="input-field" th:field="${car.km}" placeholder="Km percorsi"/></span>
+				<input type="number" class="input-field" th:field="${car.km}" placeholder="Km percorsi" /></span>
 			</div>
-			<div class="input-box">
-				<input class="input-field" type="file" placeholder="Immagine" name="immagine"></span>
+			<div>
+				<input id="upload" type="file" placeholder="Immagine" name="immagine" required hidden />
+				<label for="upload" class="img-input"> Scegli Immagine </label>
 			</div>
 			<div class="input-submit">
 				<button class="submit-btn" id="submit"></button>

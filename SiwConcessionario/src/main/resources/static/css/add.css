@@ -112,16 +112,11 @@ a:hover{
     margin: 10px 0 20px 0;
 }
 
-
-
-
 .error{
 	text-align: center;
 	color:red;
 	font-size: 17px;
 }
-
-
 
 .input-box .input-field{
     width: 100%;
@@ -179,7 +174,21 @@ a:hover{
     font-weight: 600;
 }
 
-
+.img-input {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	height: 60px;
+	font-size: 17px;
+	padding: 0 25px;
+	margin-bottom: 15px;
+	border-radius: 30px;
+	background-color: white;
+	color: #222;
+	cursor: pointer;
+	font-weight: 500;
+	box-shadow: 0px 5px 10px 1px rgba(0, 0, 0, 0.05);
+}
 
 
 

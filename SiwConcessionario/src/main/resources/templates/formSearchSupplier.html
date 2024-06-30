@@ -43,15 +43,15 @@
 
 	<h1 class="center">Immetti il modello della Macchina</h1>
 
-	<div class="search-bar">
-		<div class="search-box">
+	<div class="center" style="margin-top: 5%;">
+		<div class="input-box">
 			<form th:action="@{/formSearchSupplier}" method="post">
-				<input id="search-input" type="text" th:value="${name}" name="name"
+				<input class="input-field" type="text" th:value="${name}" name="name"
 					placeholder="Cerca un fornitore..." />
 			</form>
 		</div>
 	</div>
-	
+
 	<script>
 		const hamburger = document.querySelector(".hamburger");
 		const navMenu = document.querySelector(".nav-menu");

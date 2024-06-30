@@ -104,7 +104,7 @@ public class ReviewController{
 		
 		if(credentials.getRole().equals("ADMIN")) { //se si tratta di un admin passa tutte le review presenti sul sistema
 			model.addAttribute("reviews", this.reviewService.findAll());
-			return "manageReviews.html";
+			return "admin/manageReviews.html";
 		}
 		else { //si tratta di un fornitore
 			Supplier supplier = currentUser.getSupplier();

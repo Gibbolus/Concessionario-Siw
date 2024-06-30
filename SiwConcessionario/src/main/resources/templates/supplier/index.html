@@ -4,8 +4,8 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
-    <title>SiwConcessionario - Homepage</title>
-    <link rel="stylesheet" href="/css/index-style.css" />
+	<title>SiwConcessionario - Homepage</title>
+	<link rel="stylesheet" href="/css/index-style.css" />
 </head>
 
 <body>
@@ -27,7 +27,8 @@
 			<li class="nav-item">
 				<div class="account-reg-log">
 					<a th:if="${userDetails}" id="reg-button" class="reg-log-button" href="/logout"> Logout </a>
-					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati </a>
+					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati
+					</a>
 					<a th:unless="${userDetails}" class="reg-log-button" href="/login"> Login </a>
 				</div>
 			</li>
@@ -38,26 +39,33 @@
 			<span class="bar"></span>
 		</div>
 	</nav>
-	
-	
-    <h1 class="center">Consulta l'archivio</h1>
-    <div>
-        <a href="/formSearchSupplier"> Cerca Fornitore </a>
-        <br>
-       <a href="/formSearchCar">Cerca Macchina</a>
-       <br>
-       <h2>Modifica Archivio</h2>
-       <br>
-      	
-      	<a href="/supplier/manageCars">Modifica le Tue Auto</a>
-      	<br>
-      	<a href="/supplier/formNewOptional">Aggiungi un Optional</a>
-      	<br>
-      	<a href="/manageReviews">Gestisci le tue recensioni</a>
-    </div>
-    
-    
-    <script>
+
+	<div class="container">
+		<div class="main">
+			<h1 class="center">Consulta il nostro archivio</h1>
+			<div class="main-container">
+				<a href=" /formSearchSupplier"> Cerca Fornitore </a>
+			</div>
+			<div class="main-container">
+				<a href="/formSearchCar">Cerca Macchina</a>
+			</div>
+		</div>
+		<div class="main">
+			<h1 class="center">Modifica Archivio</h1>
+			<div class="main-container">
+				<a href="/supplier/manageCars">Modifica le Tue Auto</a>
+			</div>
+			<div class="main-container">
+				<a href="/supplier/formNewOptional">Aggiungi un Optional</a>
+			</div>
+			<div class="main-container">
+				<a href="/manageReviews">Gestisci le tue recensioni</a>
+			</div>
+		</div>
+	</div>
+
+
+	<script>
 		const hamburger = document.querySelector(".hamburger");
 		const navMenu = document.querySelector(".nav-menu");
 		hamburger.addEventListener("click", () => {
@@ -70,8 +78,5 @@
 		}))
 	</script>
 </body>
+
 </html>
-
-
-			 
-	
