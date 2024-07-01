@@ -171,8 +171,10 @@ a:hover {
 
 .grid-container {
 	margin-top: 5%;
-	display: grid;
-	grid-template-columns: 1fr;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
 	gap: 20px;
 }
 
@@ -185,8 +187,8 @@ a:hover {
 .grid-elem {
 	padding: 10px;
 	border: 1px solid #222;
-	width: 30vw;
-	min-width: 300px;
+	width: 20vw;
+	min-width: 200px;
 	text-align: center;
 
 }
