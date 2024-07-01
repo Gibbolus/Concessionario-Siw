@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -19,7 +20,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.Supplier;
+import it.uniroma3.siw.model.User;
+import it.uniroma3.siw.service.CredentialsService;
 import it.uniroma3.siw.service.SupplierService;
 import it.uniroma3.siw.validator.SupplierValidator;
 import jakarta.persistence.EntityManager;
@@ -32,9 +36,14 @@ public class SupplierController {
 
 	@Autowired
 	SupplierService supplierService;
+	
+	@Autowired GlobalController gc;
+	
+	@Autowired CredentialsService credentialsService;
 
 	@Autowired
 	SupplierValidator supplierValidator;
+	
 
 	@Autowired
 	EntityManager entityManager;
@@ -97,7 +106,14 @@ public class SupplierController {
 
 	@GetMapping(value = "/admin/manageSuppliers")
 	public String manageSuppliers(Model model) {
-		model.addAttribute("suppliers", this.supplierService.findAll());
+		List<Supplier> suppliers=(List<Supplier>) this.supplierService.findAll();
+		UserDetails u = gc.getUser();
+		String username = u.getUsername();
+		Credentials credenziali = this.credentialsService.getCredentials(username);
+		User utenteCorrente = credenziali.getUser();
+		Supplier fornitoreCorrente = utenteCorrente.getSupplier();
+		suppliers.remove(fornitoreCorrente); //rimuovi il fornitore associato all'admin per evitare che possa rimuovere se stesso
+		model.addAttribute("suppliers", suppliers);
 		return "admin/manageSuppliers.html";
 	}
 
