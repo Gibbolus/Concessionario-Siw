@@ -4,11 +4,15 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
-	<title>SiwConcessionario - Homepage</title>
-	<link rel="stylesheet" href="/css/index-style.css" />
+	<title>Gestisci Auto</title>
+	<link rel="stylesheet" href="/css/manage-reviews.css" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
 
 <body>
+
 	<nav class="nav-bar">
 		<a href="/">
 			<img class="icons-home" src="/images/home.png"></img>
@@ -40,35 +44,31 @@
 		</div>
 	</nav>
 
-	<div class="background">
-		<div class="container">
-			<div class="section">
-				<h1 class="center">Consulta il nostro archivio</h1>
-				<div class="archivio">
-					<div class="main-container">
-						<a href=" /formSearchSupplier"> Cerca Fornitore </a>
-					</div>
-					<div class="main-container">
-						<a href="/formSearchCar">Cerca Macchina</a>
-					</div>
-				</div>
-			</div>
-			<div class="section">
-				<h1 class="center">Modifica Archivio</h1>
-				<div class="archivio">
-					<div class="main-container">
-						<a href="/supplier/manageCars">Modifica le Tue Auto</a>
-					</div>
-					<div class="main-container">
-						<a href="/supplier/formNewOptional">Aggiungi un Optional</a>
-					</div>
-					<div class="main-container">
-						<a href="/manageReviews">Gestisci le tue recensioni</a>
-					</div>
-				</div>
-			</div>
+
+	<section class="reviews">
+		<div class="noReviews" th:if="${reviews.isEmpty()}">
+			<span class="material-symbols-outlined">Error</span>
+			<p>Spiacenti nessuna Recensione trovata</p>
 		</div>
-	</div>
+
+		<ul class="container">
+			<li class="boxReview" th:each="review : ${reviews}">
+				<img th:src="@{/images/__${review.getCar().urlImage}__} " alt="Immagine Auto Recensita">
+				<a th:href="@{'/review' + '/' + ${review.id}}" th:text="${review.getCar().modello} +' ' 
+					+${review.getCar().marca}">Modello Marca Auto</a>
+				<div class="voto">
+				Voto:<p th:text="${review.voto} + '/10'"></p>
+				</div>
+				
+				<div class="options">
+					<a class="remove" title="elimina" th:href="@{'/removeReview/' + ${review.id} }">
+						<i class="fa fa-trash"></i>
+					</a>
+				</div>
+			</li>
+		</ul>
+	</section>
+
 
 	<script>
 		const hamburger = document.querySelector(".hamburger");

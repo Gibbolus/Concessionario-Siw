@@ -56,6 +56,7 @@
 
 	<div class="container">
 		<div class="main-container" id="sup" th:each="supplier : ${suppliers}">
+			<img class="supplierImage" th:src="@{/images/__${supplier.urlImage}__}">
 			<a id="link-text" th:href="@{'/supplier' + '/' + ${supplier.id}}">
 				<h2 class="sup-text" th:text="${supplier.name} +' ' +${supplier.surname}"></h2>
 			</a>

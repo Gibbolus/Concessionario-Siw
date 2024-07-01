@@ -51,9 +51,9 @@
 		</div>
 	</nav>
 
+	<div class="optionals">
 
-
-	<h1 class="center"> Optional </h1>
+	<h1 class="header"> Optional </h1>
 	<div class="empty-text" th:if="${optionals.isEmpty()}">Non ci sono optional nel sistema</div>
 	<ul class="grid-container">
 		<li class="grid-list" th:each="optional : ${optionals}">
@@ -61,6 +61,7 @@
 		</li>
 	</ul>
 
+	</div>
 
 
 	<script>
