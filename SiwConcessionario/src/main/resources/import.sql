@@ -8,15 +8,15 @@ insert into car (id, modello, marca, km, url_image) values(nextval('car_seq'), '
 insert into car (id, modello, marca, km, url_image) values(nextval('car_seq'), 'Corsa', 'Opel', 10000 , 'OpelCorsa.jpg');
 insert into car (id, modello, marca, km, url_image) values(nextval('car_seq'), 'Classe A', 'Mercedes', 50000 , 'MercedesClasseA.jpg');
 insert into car (id, modello, marca, km, url_image) values(nextval('car_seq'), 'Classe C', 'Mercedes', 30000 , 'MercedesClasseC.jpg');
-insert into car (id, modello, marca, km, url_image) values(nextval('car_seq'), 'GLA', 'Mercedes', 20000 , 'MercedesGLA.jepg');
-
+insert into car (id, modello, marca, km, url_image) values(nextval('car_seq'), 'GLA', 'Mercedes', 20000 , 'MercedesGLA.jpeg');
+insert into car (id, modello, marca, km, url_image) values(nextval('car_seq'), 'Mini', 'British Leyland', 6000 , 'MrBean.png');
 
 
 insert into supplier (id, name, surname, birth, url_image) values(nextval('supplier_seq'), 'Maxiauto', 'Service', '8-10-1985' , 'Maxiauto.jpg');
 insert into supplier (id, name, surname, birth, url_image) values(nextval('supplier_seq'), 'Target', 'Concessionari', '20-05-1980' , 'TargetConcessionari.jpg');
 insert into supplier (id, name, surname, birth, url_image) values(nextval('supplier_seq'), 'Auto', 'Land', '18-08-2008' , 'AutoLand.jpg');
 insert into supplier (id, name, surname, birth, url_image) values(nextval('supplier_seq'), 'Car', 'Dealers', '03-11-2000' , 'CarDealers.jpg');
-
+insert into supplier (id, name, surname, birth, url_image) values(nextval('supplier_seq'), 'Mr', 'Bean', '06-01-1955' , 'MrBeanMan.png');
 
 
 
