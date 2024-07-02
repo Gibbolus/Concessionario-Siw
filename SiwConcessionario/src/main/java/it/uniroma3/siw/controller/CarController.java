@@ -39,9 +39,12 @@ import jakarta.validation.Valid;
 @Controller
 public class CarController {
 
-    private static final String UPLOAD_DIR = "C:\\Users\\Gabriele\\git\\Concessionario\\SiwConcessionario\\src\\main\\resources\\static\\images"; 
-	
-	/*private static final String UPLOAD_DIR= "C:\\Users\\39345\\Documents\\Concessionario-Siw\\SiwConcessionario\\src\\main\\resources\\static\\images"; */
+	private static final String UPLOAD_DIR = "C:\\Users\\Gabriele\\git\\Concessionario\\SiwConcessionario\\src\\main\\resources\\static\\images";
+
+	/*
+	 * private static final String UPLOAD_DIR=
+	 * "C:\\Users\\39345\\Documents\\Concessionario-Siw\\SiwConcessionario\\src\\main\\resources\\static\\images";
+	 */
 	@Autowired
 	CarService carService;
 
@@ -65,7 +68,15 @@ public class CarController {
 
 	@GetMapping(value = "/car/{id}")
 	public String getCar(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("car", this.carService.findById(id));
+		Car c = this.carService.findById(id);
+		UserDetails u = gc.getUser();
+		if(u!=null) {
+			String username = u.getUsername();
+			Credentials credenziali = this.credentialsService.getCredentials(username);
+			User user = credenziali.getUser();
+			model.addAttribute("user", user);
+		}
+		model.addAttribute("car", c);
 		return "car.html";
 	}
 
@@ -143,32 +154,33 @@ public class CarController {
 	}
 
 	@PostMapping(value = "/car")
-	public String newCar(@Valid @ModelAttribute("car") Car car, @RequestParam("immagine") MultipartFile file, BindingResult carBindingResult, Model model) {
+	public String newCar(@Valid @ModelAttribute("car") Car car, @RequestParam("immagine") MultipartFile file,
+			BindingResult carBindingResult, Model model) {
 		UserDetails u = gc.getUser();
 		String username = u.getUsername();
 		Credentials credenziali = this.credentialsService.getCredentials(username);
 		User utenteCorrente = credenziali.getUser();
 		Supplier supplier = utenteCorrente.getSupplier();
-		
+
 		car.setSupplier(supplier);
 		car.optionals = new ArrayList<OptionalCar>();
 		car.review = new ArrayList<Review>();
 
 		this.carValidator.validate(car, carBindingResult);
 		if (!carBindingResult.hasErrors()) {
-			if(!file.isEmpty()) {
+			if (!file.isEmpty()) {
 				try {
 					String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 					Path path = Paths.get(UPLOAD_DIR + File.separator + fileName);
 					Files.write(path, file.getBytes());
 					car.setUrlImage(fileName);
-					
+
 					supplier.getCars().add(car);
 					this.carService.save(car);
 					model.addAttribute("car", car);
-					
+
 					return "redirect:car/" + car.getId();
-					
+
 				} catch (IOException e) {
 					e.printStackTrace();
 					return "addCar.hmtl";

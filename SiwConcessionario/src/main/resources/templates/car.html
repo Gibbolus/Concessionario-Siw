@@ -7,7 +7,8 @@
 	<title> Macchina</title>
 	<link rel="stylesheet" href="/css/car-sup.css?version=4" />
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
 
 <body>
@@ -65,10 +66,14 @@
 					</span>
 					<span th:unless="${car.supplier!=null}">Non disponibile</span>
 				</div>
-				<div th:if="${userDetails}" id="review">
-					<a th:href="@{'/formNewReview/' + ${car.id}}"><i class="fa fa-pencil-square-o"></i> Aggiungi una
-						recensione </a>
+
+				<div th:if="${userDetails!=null}">
+					<div th:if="${(car.supplier==null) || (car.supplier.name!=user.supplier.name)}" id="review">
+						<a th:href="@{'/formNewReview/' + ${car.id}}"><i class="fa fa-pencil-square-o"></i> Aggiungi una
+							recensione </a>
+					</div>
 				</div>
+
 				<div id="review">
 					<a th:href="@{${car.id} + '/reviews'}"> <i class="fa fa-eye"></i> Guarda tutte le recensioni </a>
 				</div>
