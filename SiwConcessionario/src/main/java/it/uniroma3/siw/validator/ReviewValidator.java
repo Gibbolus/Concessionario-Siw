@@ -10,8 +10,9 @@ import it.uniroma3.siw.service.ReviewService;
 
 @Component
 public class ReviewValidator implements Validator {
-	
-	@Autowired ReviewService reviewService;
+
+	@Autowired
+	ReviewService reviewService;
 
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -20,22 +21,16 @@ public class ReviewValidator implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		Review r=(Review) target;
-		if(r.getVoto()<0 || r.getVoto()>10) {
+		Review r = (Review) target;
+		if (r.getVoto() < 0 || r.getVoto() > 10) {
 			errors.reject("voto.error");
 		}
-		if(r.supplier.equals(r.car.supplier)) {
-			errors.reject("recensione.error");
-		}
-		for(Review review: r.car.getReviews()) { //sfoglia tutte le recensioni
-			if(review.getSupplier().equals(r.getSupplier())) { //se tra le recensioni ne trovi una con lo stesso fornitore
-				errors.reject("recensione.duplicate");  //il fornitore ha già rilasciato una recensione per quell'auto
+		for (Review review : r.car.getReviews()) { // sfoglia tutte le recensioni
+			if (review.getSupplier().equals(r.getSupplier())) { // se tra le recensioni ne trovi una con lo stesso
+																// fornitore
+				errors.reject("recensione.duplicate"); // il fornitore ha già rilasciato una recensione per quell'auto
 			}
 		}
-		
-		
 	}
-	
-	
-	
+
 }
