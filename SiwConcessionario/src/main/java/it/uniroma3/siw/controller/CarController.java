@@ -39,8 +39,9 @@ import jakarta.validation.Valid;
 @Controller
 public class CarController {
 
-	private static final String UPLOAD_DIR = "C:\\Users\\Gabriele\\git\\Concessionario\\SiwConcessionario\\src\\main\\resources\\static\\images";
+    private static final String UPLOAD_DIR = "C:\\Users\\Gabriele\\git\\Concessionario\\SiwConcessionario\\src\\main\\resources\\static\\images"; 
 	
+	/*private static final String UPLOAD_DIR= "C:\\Users\\39345\\Documents\\Concessionario-Siw\\SiwConcessionario\\src\\main\\resources\\static\\images"; */
 	@Autowired
 	CarService carService;
 
