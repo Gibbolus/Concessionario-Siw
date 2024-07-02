@@ -136,6 +136,7 @@ a:hover {
 .car-text {
 	margin: auto auto 5% auto;
 	text-align: center;
+	color: black;
 }
 
 #link-text {
@@ -149,7 +150,7 @@ a:hover {
 }
 
 .supplierImage{
-	border-radius: inherit;
+	border-radius: 50px;
 	display:block;
 	object-fit:cover;
 	object-position: center;
@@ -158,7 +159,6 @@ a:hover {
 	margin-right:2%;
 	height: 70%;
 }
-
 
 
 .input-box .input-field {
