@@ -52,21 +52,21 @@
 	</nav>
 
 
+	<div class="cars">
 
-
-	<h1 class="center"> Tutte le macchine</h1>
-	<div class="empty-text" th:if="${cars.isEmpty()}">Non ci sono macchine nel sistema</div>
-	<div class="container">
-		<div class="main-container" th:each="car : ${cars}">
-			<a th:href="@{'/car' + '/' + ${car.id}}">
-				<img class="img" th:src="@{/images/__${car.urlImage}__}">
-			</a>
-			<h2 class="car-text" th:text="${car.marca} +' ' +${car.modello}"></h2>
+		<h1 class="center"> Tutte le macchine:</h1>
+		<div class="empty-text" th:if="${cars.isEmpty()}">Non ci sono macchine nel sistema</div>
+		<div class="container">
+			<div class="main-container" th:each="car : ${cars}">
+				<a th:href="@{'/car' + '/' + ${car.id}}">
+					<img class="img" th:src="@{/images/__${car.urlImage}__}">
+				</a>
+				<h2 class="car-text" th:text="${car.marca} +' ' +${car.modello}"></h2>
+			</div>
 		</div>
+
+
 	</div>
-
-
-
 
 	<script>
 		const hamburger = document.querySelector(".hamburger");

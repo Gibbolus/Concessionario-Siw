@@ -64,9 +64,9 @@ public class ReviewController{
 		String username = u.getUsername();
 		Credentials credentials = this.credentialsService.getCredentials(username);
 		if(credentials.getRole().equals("ADMIN")) {
-			return "admin/formNewReview.html";
+			return "/admin/formNewReview.html"; 
 		}
-		return "supplier/formNewReview.html";
+		return "/supplier/formNewReview.html";
 	}
 	
 	@PostMapping(value = "/review")
@@ -89,10 +89,7 @@ public class ReviewController{
 			return "redirect:review/" + review.getId();
 		}
 		else
-			if(credentials.getRole().equals("ADMIN")) {
-				return "redirect:/admin/formNewReview"+ reviewdCar.getId();
-			}
-			return "redirect:/supplier/formNewReview/" + reviewdCar.getId();
+			return "redirect:/formNewReview/" + reviewdCar.getId();
 	}
 	
 	@GetMapping(value="/manageReviews")

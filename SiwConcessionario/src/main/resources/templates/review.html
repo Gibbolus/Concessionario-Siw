@@ -41,14 +41,14 @@
 	<h1 class="center"> La tua recensione </h1>
 
 	<div class="main-container" th:if="${review}">
-		<div class="review-container">
-			<div class="img-car">
-				<img class="img" th:src="@{/images/__${review.getCar().urlImage}__}">
+		<div class="review-container" id="review">
+			<div class="img-car" >
+				<img class="img" id="img-review" th:src="@{/images/__${review.getCar().urlImage}__}">
 			</div>
 
 			<div>
-				<div class="review-main" th:if="${review.recensione} != null">
-					<span class="username" th:text="${review.getSupplier().getName()}"></span>
+				<div class="review-main" id="boxReview" th:if="${review.recensione} != null">
+					<span class="username" th:text="${review.getSupplier().getName()} +' ' +${review.getSupplier().getSurname()}"></span>
 					<span class="username" th:text="${review.voto} + '/10'"></span>
 					<br>
 					<span class="review-text" th:text="${review.recensione}"></span>
