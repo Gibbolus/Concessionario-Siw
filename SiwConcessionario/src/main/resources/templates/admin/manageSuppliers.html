@@ -61,6 +61,7 @@
 					alt="Immagine Fornitore">
 				<a th:href="@{'/supplier' + '/' + ${supplier.id}}" th:text="${supplier.name} +' ' +${supplier.surname}">Nome Cognome</a>
 				<div class="options">
+					<a class="update" title="aggiungi Macchina a Fornitore" th:href="@{'/admin/addCarToSupplier/' +${supplier.id} }"><i class="fa fa-plus-circle"></i></a>
 					<a class="remove" title="elimina" th:href="@{'/admin/removeSupplier/' + ${supplier.id} }">
 						<i class="fa fa-trash"></i>
 					</a>

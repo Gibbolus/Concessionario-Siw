@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="/css/addCarToSupplier.css?v=3" />
+    <title>Nuova Macchina</title>
+</head>
+<body>
+	
+	<form th:action="@{/admin/addCarToSupplier}" method="POST" th:object="${car}" enctype="multipart/form-data">
+		
+		<div class="car-box">
+			<div class="car-header">
+			<h1>Nuova Macchina</h1>
+			</div>
+			<div><input type="hidden" name="supplierId" th:value="${supplier.id}"></div>
+			<div class="car-error" 
+			th:if="${#fields.hasGlobalErrors()}">
+				<p class="error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+			</div>
+			
+			
+			
+	        <div class="car-input">
+	            <input class="input-field" type="text" placeholder="modello..." required th:field="${car.modello}" />
+	             <span th:if="${#fields.hasErrors('modello')}" th:errors="*{modello}"></span>
+	        </div>
+	        <div class="car-input">
+	            <input class="input-field" type="text" placeholder="marca..." th:field="${car.marca}" />
+	        </div>
+	        <div class="car-input">
+	            <input class="input-field" type="number" placeholder="km percorsi..." th:field="${car.km}" />
+	        </div>
+	         <div class="car-input">
+	            <input class="input-image" type="file" placeholder="immagine" name="immagine"/>
+	        </div>
+	        <div class="input-submit">
+	            <button class="submit-btn" id="submit"></button>
+	            <label for="submit">Conferma</label>
+	       </div>
+       </div>
+    </form>
+      
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

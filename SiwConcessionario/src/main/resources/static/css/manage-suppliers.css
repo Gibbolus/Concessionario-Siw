@@ -172,6 +172,16 @@ a:hover {
 .boxSupplier .options {
 	display: flex;
 	justify-content:center;
+	gap:2vh;
+}
+
+.options .update{
+	display:inline-block;
+}
+
+
+.options .update:hover{
+	color:limegreen;
 }
 
 .options .remove:hover {

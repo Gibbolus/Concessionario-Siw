@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.model.Car;
-
 import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.Supplier;
 import it.uniroma3.siw.model.OptionalCar;
@@ -32,6 +31,7 @@ import it.uniroma3.siw.service.CarService;
 import it.uniroma3.siw.service.CredentialsService;
 import it.uniroma3.siw.service.OptionalCarService;
 import it.uniroma3.siw.service.ReviewService;
+import it.uniroma3.siw.service.SupplierService;
 import it.uniroma3.siw.validator.CarValidator;
 import jakarta.persistence.EntityManager;
 import jakarta.validation.Valid;
@@ -41,12 +41,16 @@ public class CarController {
 
 	private static final String UPLOAD_DIR = "C:\\Users\\Gabriele\\git\\Concessionario\\SiwConcessionario\\src\\main\\resources\\static\\images";
 
-	/*
-	 * private static final String UPLOAD_DIR=
-	 * "C:\\Users\\39345\\Documents\\Concessionario-Siw\\SiwConcessionario\\src\\main\\resources\\static\\images";
-	 */
+	
+	 /* private static final String UPLOAD_DIR=
+	  "C:\\Users\\39345\\Documents\\Concessionario-Siw\\SiwConcessionario\\src\\main\\resources\\static\\images";
+	  */
+	 
 	@Autowired
 	CarService carService;
+	
+	@Autowired
+	SupplierService supplierService;
 
 	@Autowired
 	OptionalCarService optCarService;
@@ -242,5 +246,43 @@ public class CarController {
 		return "redirect:/admin/manageCars";
 
 	}
+	
+	@GetMapping("/admin/addCarToSupplier/{idSupplier}")
+	public String addCarToSupplier(@PathVariable("idSupplier") Long idSupplier,Model model) {
+		Supplier s=this.supplierService.findById(idSupplier);
+		model.addAttribute("supplier", s);
+		Car car=new Car();
+		model.addAttribute("car",car);
+		return "admin/addCarToSupplier.html";
+	}
+	
+	@PostMapping("/admin/addCarToSupplier")
+	public String setCarToSupplier(@Valid @ModelAttribute("car")Car car, BindingResult carBindingResult,@RequestParam("supplierId")Long supplierId,@RequestParam("immagine") MultipartFile file) {
+		Supplier s= this.supplierService.findById(supplierId);
+		car.setSupplier(s);
+		car.optionals=new ArrayList<OptionalCar>();
+		
+		this.carValidator.validate(car, carBindingResult);
+		if(!carBindingResult.hasErrors()) {
+			if(!file.isEmpty()) {
+				try {
+					String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+					Path path = Paths.get(UPLOAD_DIR + File.separator + fileName);
+					Files.write(path, file.getBytes());
+					car.setUrlImage(fileName);
+					s.getCars().add(car);
+					this.carService.save(car);
+					return "redirect:/car/" + car.getId();
+					
+			} catch (IOException e) {
+				e.printStackTrace();
+				return "redirect:/admin/addCarToSupplier/"+s.getId();
+			}
+		}
+	}
+
+		return "redirect:/admin/addCarToSupplier/"+s.getId();
+}
+
 
 }
