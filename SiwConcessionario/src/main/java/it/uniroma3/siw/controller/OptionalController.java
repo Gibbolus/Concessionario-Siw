@@ -18,6 +18,7 @@ import it.uniroma3.siw.model.Car;
 import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.Optional;
 import it.uniroma3.siw.model.OptionalCar;
+import it.uniroma3.siw.repository.OptionalRepository;
 import it.uniroma3.siw.service.CarService;
 import it.uniroma3.siw.service.CredentialsService;
 import it.uniroma3.siw.service.OptionalCarService;
@@ -30,6 +31,8 @@ import jakarta.validation.Valid;
 public class OptionalController {
 	
 	@Autowired OptionalService optionalService;
+	
+	@Autowired OptionalRepository optionalRepository;
 	
 	@Autowired CarService carService;
 	
@@ -62,8 +65,7 @@ public class OptionalController {
 	
 	@PostMapping(value = "/formSearchOptional")
 	public String getOptionals(@RequestParam String name, Model model) {
-		String query = "SELECT o FROM Optional o WHERE LOWER(o.name) LIKE LOWER('%" + name + "%')";
-		List<Optional> optionals = this.entityManager.createQuery(query, Optional.class).getResultList();
+		List<Optional> optionals = this.optionalRepository.findOptionals(name);
 		model.addAttribute("optionals", optionals);
 		return "optionals.html";
 	}

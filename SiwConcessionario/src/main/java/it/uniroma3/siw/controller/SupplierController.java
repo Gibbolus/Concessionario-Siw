@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.Supplier;
 import it.uniroma3.siw.model.User;
+import it.uniroma3.siw.repository.SupplierRepository;
 import it.uniroma3.siw.service.CredentialsService;
 import it.uniroma3.siw.service.SupplierService;
 import it.uniroma3.siw.validator.SupplierValidator;
@@ -32,12 +33,15 @@ import jakarta.validation.Valid;
 @Controller
 public class SupplierController {
 
-	 private static final String UPLOAD_DIR = "C:\\Users\\Gabriele\\git\\Concessionario\\SiwConcessionario\\src\\main\\resources\\static\\images"; 
+	/* private static final String UPLOAD_DIR = "C:\\Users\\Gabriele\\git\\Concessionario\\SiwConcessionario\\src\\main\\resources\\static\\images"; */
 	
-	 /*private static final String UPLOAD_DIR= "C:\\Users\\39345\\Documents\\Concessionario-Siw\\SiwConcessionario\\src\\main\\resources\\static\\images"; */
+	 private static final String UPLOAD_DIR= "C:\\Users\\39345\\Documents\\Concessionario-Siw\\SiwConcessionario\\src\\main\\resources\\static\\images"; 
 	 
 	@Autowired
 	SupplierService supplierService;
+	
+	@Autowired 
+	SupplierRepository supplierRepository;
 	
 	@Autowired GlobalController gc;
 	
@@ -69,8 +73,7 @@ public class SupplierController {
 
 	@PostMapping(value = "/formSearchSupplier")
 	public String getSupplier(@RequestParam String name, Model model) {
-		String query = "SELECT s FROM Supplier s WHERE LOWER(s.name) LIKE LOWER('%" + name + "%')";
-		List<Supplier> suppliers = this.entityManager.createQuery(query, Supplier.class).getResultList();
+		List<Supplier> suppliers = this.supplierRepository.findSuppliers(name);
 		model.addAttribute("suppliers", suppliers);
 		return "suppliers.html";
 	}

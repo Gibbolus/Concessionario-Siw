@@ -27,6 +27,7 @@ import it.uniroma3.siw.model.Supplier;
 import it.uniroma3.siw.model.OptionalCar;
 import it.uniroma3.siw.model.Review;
 import it.uniroma3.siw.model.User;
+import it.uniroma3.siw.repository.CarRepository;
 import it.uniroma3.siw.service.CarService;
 import it.uniroma3.siw.service.CredentialsService;
 import it.uniroma3.siw.service.OptionalCarService;
@@ -39,15 +40,17 @@ import jakarta.validation.Valid;
 @Controller
 public class CarController {
 
-	private static final String UPLOAD_DIR = "C:\\Users\\Gabriele\\git\\Concessionario\\SiwConcessionario\\src\\main\\resources\\static\\images";
+	/*private static final String UPLOAD_DIR = "C:\\Users\\Gabriele\\git\\Concessionario\\SiwConcessionario\\src\\main\\resources\\static\\images"; */
 
 	
-	 /* private static final String UPLOAD_DIR=
-	  "C:\\Users\\39345\\Documents\\Concessionario-Siw\\SiwConcessionario\\src\\main\\resources\\static\\images";
-	  */
+	private static final String UPLOAD_DIR= "C:\\Users\\39345\\Documents\\Concessionario-Siw\\SiwConcessionario\\src\\main\\resources\\static\\images";
+	  
 	 
 	@Autowired
 	CarService carService;
+	
+	@Autowired
+	CarRepository carRepository;
 	
 	@Autowired
 	SupplierService supplierService;
@@ -97,8 +100,7 @@ public class CarController {
 
 	@PostMapping(value = "/formSearchCar")
 	public String getCarByModello(@RequestParam String marca, Model model) {
-		String query = "SELECT c FROM Car c WHERE LOWER(c.marca) LIKE LOWER('%" + marca + "%')";
-		List<Car> cars = this.entityManager.createQuery(query, Car.class).getResultList();
+		List<Car> cars =this.carRepository.findCars(marca);
 		model.addAttribute("cars", cars);
 		return "cars.html";
 	}
