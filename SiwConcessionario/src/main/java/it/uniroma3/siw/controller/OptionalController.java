@@ -18,6 +18,8 @@ import it.uniroma3.siw.model.Car;
 import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.Optional;
 import it.uniroma3.siw.model.OptionalCar;
+import it.uniroma3.siw.model.Supplier;
+import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.repository.OptionalRepository;
 import it.uniroma3.siw.service.CarService;
 import it.uniroma3.siw.service.CredentialsService;
@@ -119,7 +121,15 @@ public class OptionalController {
 	
 	@GetMapping(value = "supplier/manageOptionals/{id}")
 	public String manageOptionals(@PathVariable("id") Long id, Model model) {
-		Car car=this.carService.findById(id);
+		Car car= this.carService.findById(id);
+		UserDetails user=gc.getUser();
+		String username=user.getUsername();
+		Credentials credenziali= this.credentialsService.getCredentials(username);
+		User utenteCorrente=credenziali.getUser();
+		Supplier fornitore=utenteCorrente.getSupplier();
+		if(car.getSupplier()!=fornitore) {
+			return "redirect:/supplier/manageCars";
+		}
 		model.addAttribute("car",car);
 		List<Optional> optionalNonPresenti= new ArrayList<Optional>();
 		for(Optional opt : this.optionalService.findAll()) {

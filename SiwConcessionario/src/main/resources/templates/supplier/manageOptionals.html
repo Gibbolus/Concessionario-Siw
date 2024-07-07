@@ -40,12 +40,12 @@
 		</div>
 	</nav>
 
-	<h1 class="center"> Aggiungi un ptional</h1>
+	<h1 class="center"> Aggiungi un Optional</h1>
 
 	<div th:if="${car}">
 		<br>
 		<div class="title">
-			<h3 th:text="${car.marca} + ' ' + ${car.modello}"> Nome Modello </h3>
+			<h2 th:text="${car.marca} + ' ' + ${car.modello}"> Nome Modello </h2>
 		</div>
 		<div class="img-text">
 			<div>
@@ -57,6 +57,7 @@
 					<h2>Lista optional:</h2>
 
 					<div class="optionals" th:unless="${car.optionals.isEmpty()}">
+						<h3>Optionals Presenti:</h3>
 						<li th:each="optionalCar : ${car.optionals}">
 							<span th:text="${optionalCar.opt.name}"> </span>
 							<a class="link" id="remove" th:href="@{'/supplier/removeOptional/' + ${car.id} +'/' +${optionalCar.id}}">Rimuovi</a>
@@ -65,8 +66,9 @@
 					<ul>
 						<div style="font-size: larger;" th:if="${optionals.isEmpty()}">Non ci sono altri optionals disponibili </div>
 						<div th:unless="${optionals.isEmpty()}">
+							<h3>Optionals Disponibili:</h3>
 							<li th:each="optional : ${optionals}">
-								<a th:text="${optional.name}">Up!</a>
+								<a  th:text="${optional.name}">Up!</a>
 								<a class="link" id="add" th:href="@{'/supplier/setOptionalToCar/' + ${car.id} +'/' +${optional.id}}">Aggiungi </a>
 							</li>
 						</div>

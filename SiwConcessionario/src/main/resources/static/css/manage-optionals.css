@@ -81,9 +81,6 @@ body{
 	justify-content: center;
 }
 
-a:hover{
-    text-decoration: underline;
-}
 
 .title{
 	display: flex;
@@ -111,7 +108,7 @@ a:hover{
 }
 
 .optionals{
-	width:40vh;
+	width:70vh;
 	height:auto;
 	margin-top:5%;
 	display:flex;
