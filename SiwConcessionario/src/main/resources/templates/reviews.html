@@ -49,6 +49,7 @@
 			</div>
 		</div>
 		<ul class="container">
+
 			<div th:unless="${reviews.isEmpty()}" th:each="review : ${reviews}">
 				<div class="reviews">
 					<div class="review-main" th:if="${review.recensione} != null">

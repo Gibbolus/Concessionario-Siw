@@ -48,6 +48,17 @@ public class ReviewController{
 	@GetMapping(value = "/car/{carId}/reviews")
 	public String showAllReviews(@PathVariable("carId") Long carId, Model model) {
 		Car c = this.carService.findById(carId);
+		/*int numeroRecensioni=c.getReviews().size();
+		int totale=0;
+		for(Review r: c.getReviews()) {
+			totale+=r.getVoto();
+		}
+		float media=0;
+		if(numeroRecensioni!=0) {
+			media=(float)totale/numeroRecensioni;
+		}
+		model.addAttribute("media", media);
+		*/
 		model.addAttribute("reviews", c.getReviews());
 		model.addAttribute("car", c);
 		return "reviews.html";

@@ -82,7 +82,17 @@ public class CarController {
 			Credentials credenziali = this.credentialsService.getCredentials(username);
 			User user = credenziali.getUser();
 			model.addAttribute("user", user);
+			Supplier fornitore=user.getSupplier();
+			boolean recensito=false;
+			for(Review r: fornitore.reviews) {
+				if(r.car.getId()==c.getId()) {
+					recensito=true;
+					break;
+				}
+			}
+			model.addAttribute("recensito", recensito);
 		}
+		
 		model.addAttribute("car", c);
 		return "car.html";
 	}
