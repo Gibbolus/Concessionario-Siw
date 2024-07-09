@@ -133,11 +133,7 @@ public class CarController {
 		return "supplier/addCar.html";
 	}
 
-	@GetMapping(value = "supplier/formUpdateCar/{id}")
-	public String UpdateCar(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("car", this.carService.findById(id));
-		return "supplier/formUpdateCar.html";
-	}
+
 
 	@GetMapping(value = "supplier/removeCar/{id}")
 	public String removeCar(@PathVariable("id") Long id, Model model) {
@@ -222,11 +218,6 @@ public class CarController {
 		return "admin/manageCars.html";
 	}
 
-	@GetMapping(value = "admin/FormUpdateCar/{id}")
-	public String AdminUpdateCar(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("car", this.carService.findById(id));
-		return "admin/formUpdateCar.html";
-	}
 
 	@GetMapping(value = "admin/removeCar/{id}")
 	public String AdminRemoveCar(@PathVariable("id") Long id, Model model) {

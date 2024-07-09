@@ -57,6 +57,7 @@
 					<h2>Lista optional:</h2>
 
 					<div class="optionals" th:unless="${car.optionals.isEmpty()}">
+						<h3>Optionals Presenti:</h3>
 						<li th:each="optionalCar : ${car.optionals}">
 							<span th:text="${optionalCar.opt.name}"> </span>
 							<a class="link" id="remove" th:href="@{'/admin/removeOptional/' + ${car.id} +'/' +${optionalCar.id}}">Rimuovi</a>
@@ -65,6 +66,7 @@
 					<ul>
 						<div style="font-size: larger;" th:if="${optionals.isEmpty()}">Non ci sono altri optionals disponibili </div>
 						<div th:unless="${optionals.isEmpty()}">
+							<h3>Optionals Disponibili:</h3>
 							<li th:each="optional : ${optionals}">
 								<a th:text="${optional.name}">Up!</a>
 								<a class="link" id="add" th:href="@{'/admin/setOptionalToCar/' + ${car.id} +'/' +${optional.id}}">Aggiungi </a>

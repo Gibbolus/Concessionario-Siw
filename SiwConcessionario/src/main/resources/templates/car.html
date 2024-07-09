@@ -68,8 +68,8 @@
 				</div>
 
 				<div th:if="${userDetails!=null}">
-					<div th:if="${recensito==false}" id="review">
-						<div th:if="${car.supplier == null} or (${car.supplier.name != user.supplier.name})">
+					<div th:if="${recensito==false}">
+						<div th:if="${car.supplier == null} or (${car.supplier.name != user.supplier.name})" id="review">
 							<a th:href="@{'/formNewReview/' + ${car.id}}"><i class="fa fa-pencil-square-o"></i> Aggiungi
 								una
 								recensione </a>
