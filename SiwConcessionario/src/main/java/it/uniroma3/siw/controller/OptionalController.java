@@ -75,10 +75,10 @@ public class OptionalController {
 	
 	@PostMapping(value = "/optional")
 	public String newOptional(@Valid @ModelAttribute("optional")Optional opt,
-            BindingResult ingredientBindingResult) {
-		this.optionalValidator.validate(opt,ingredientBindingResult);
+            BindingResult optionalBindingResult) {
+		this.optionalValidator.validate(opt,optionalBindingResult);
 		
-		if(!ingredientBindingResult.hasErrors()) {
+		if(!optionalBindingResult.hasErrors()) {
 		this.optionalService.save(opt);
 		return "redirect:/optional";
 		}
